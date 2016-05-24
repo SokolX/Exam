@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>bind_to_port.c</itemPath>
+      <itemPath>bind_to_port.h</itemPath>
+      <itemPath>catch_signal.c</itemPath>
+      <itemPath>catch_signal.h</itemPath>
+      <itemPath>hold_api.c</itemPath>
+      <itemPath>hold_api.h</itemPath>
+      <itemPath>komunikat_error.c</itemPath>
+      <itemPath>komunikat_error.h</itemPath>
+      <itemPath>main.c</itemPath>
+      <itemPath>open_listener_socket.c</itemPath>
+      <itemPath>open_listener_socket.h</itemPath>
+      <itemPath>read_in.c</itemPath>
+      <itemPath>read_in.h</itemPath>
+      <itemPath>say.c</itemPath>
+      <itemPath>say.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+      </compileType>
+      <item path="bind_to_port.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="bind_to_port.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="catch_signal.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="catch_signal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hold_api.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hold_api.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="komunikat_error.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="komunikat_error.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="open_listener_socket.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="open_listener_socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="read_in.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="read_in.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="say.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="say.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="bind_to_port.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="bind_to_port.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="catch_signal.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="catch_signal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hold_api.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hold_api.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="komunikat_error.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="komunikat_error.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="open_listener_socket.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="open_listener_socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="read_in.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="read_in.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="say.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="say.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
