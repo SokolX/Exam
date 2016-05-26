@@ -47,9 +47,10 @@ int main(int argc, char *argv[])
             close(listener_d);
 
             //if (say(connect_d, "Czas zacząć egzamin testowy\n - Egzamin jednokrotnego wyboru\n2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>") != -1)
-
+ 
             read_in(connect_d, buf, sizeof(buf));         
 
+            
             if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
                 say(connect_d, "Odpowiedzi powinny byc jednoliterowe");
 
