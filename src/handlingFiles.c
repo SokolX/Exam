@@ -4,3 +4,4 @@
  * and open the template in the editor.
  */
 
+#include "../yajl/yajl_tree.h"

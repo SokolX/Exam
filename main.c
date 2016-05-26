@@ -18,7 +18,6 @@
 #include "komunikat_error.h"
 int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 #include "src/socketUtils.h"
-#include "yajl/yajl_tree.h"
 
 
 int main(int argc, char *argv[])
@@ -50,6 +49,7 @@ int main(int argc, char *argv[])
  
             read_in(connect_d, buf, sizeof(buf));         
 
+            say(connect_d, logInChecker(buf));
             
             if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
                 say(connect_d, "Odpowiedzi powinny byc jednoliterowe");

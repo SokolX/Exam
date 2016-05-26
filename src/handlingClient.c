@@ -4,3 +4,9 @@
  * and open the template in the editor.
  */
 
+#include "../yajl/yajl_tree.h"
+
+char* logInChecker(char* buf){
+    //magic happens here
+    return " {\"id_sesji\":\"0/1/2\"} jeżeli ok, lub {\"message\":\"Nie można zalogować\"} jeżeli błąd";
+}
