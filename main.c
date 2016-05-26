@@ -18,7 +18,7 @@
 #include "komunikat_error.h"
 int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 #include "src/socketUtils.h"
-#include <yajl/yajl_tree.h>
+#include "yajl/yajl_tree.h"
 
 
 int main(int argc, char *argv[])
@@ -37,8 +37,6 @@ int main(int argc, char *argv[])
     puts("Czekam na połączenie");
 
     char buf[255];
-    
-    yajl_val node;
 
     while (1) {
         int connect_d = accept(listener_d, (struct sockaddr *)&client_addr, &address_size);
@@ -50,8 +48,7 @@ int main(int argc, char *argv[])
 
             //if (say(connect_d, "Czas zacząć egzamin testowy\n - Egzamin jednokrotnego wyboru\n2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>") != -1)
 
-
-            read_in(connect_d, buf, sizeof(buf));
+            read_in(connect_d, buf, sizeof(buf));         
 
             if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
                 say(connect_d, "Odpowiedzi powinny byc jednoliterowe");
