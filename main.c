@@ -18,6 +18,7 @@
 #include "komunikat_error.h"
 int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 #include "src/socketUtils.h"
+#include <yajl/yajl_tree.h>
 
 
 int main(int argc, char *argv[])
@@ -36,6 +37,8 @@ int main(int argc, char *argv[])
     puts("Czekam na połączenie");
 
     char buf[255];
+    
+    yajl_val node;
 
     while (1) {
         int connect_d = accept(listener_d, (struct sockaddr *)&client_addr, &address_size);
