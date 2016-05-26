@@ -15,23 +15,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>bind_to_port.c</itemPath>
-      <itemPath>bind_to_port.h</itemPath>
-      <itemPath>catch_signal.c</itemPath>
-      <itemPath>catch_signal.h</itemPath>
       <itemPath>src/handlingClient.c</itemPath>
       <itemPath>src/handlingFiles.c</itemPath>
-      <itemPath>hold_api.c</itemPath>
-      <itemPath>hold_api.h</itemPath>
       <itemPath>komunikat_error.c</itemPath>
       <itemPath>komunikat_error.h</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>open_listener_socket.c</itemPath>
-      <itemPath>open_listener_socket.h</itemPath>
-      <itemPath>read_in.c</itemPath>
-      <itemPath>read_in.h</itemPath>
-      <itemPath>say.c</itemPath>
-      <itemPath>say.h</itemPath>
       <itemPath>src/socketUtils.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -65,31 +53,11 @@
           <commandlineTool>gcc</commandlineTool>
         </cTool>
       </compileType>
-      <item path="bind_to_port.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="bind_to_port.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="catch_signal.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="catch_signal.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="hold_api.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="hold_api.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="komunikat_error.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="komunikat_error.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="open_listener_socket.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="open_listener_socket.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="read_in.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="read_in.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="resources/Exams.json" ex="false" tool="3" flavor2="0">
       </item>
@@ -100,10 +68,6 @@
       <item path="resources/Results.json" ex="false" tool="3" flavor2="0">
       </item>
       <item path="resources/Session.json" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="say.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="say.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Users.json" ex="false" tool="3" flavor2="0">
       </item>
@@ -140,31 +104,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="bind_to_port.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="bind_to_port.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="catch_signal.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="catch_signal.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="hold_api.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="hold_api.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="komunikat_error.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="komunikat_error.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="open_listener_socket.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="open_listener_socket.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="read_in.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="read_in.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="resources/Exams.json" ex="false" tool="3" flavor2="0">
       </item>
@@ -175,10 +119,6 @@
       <item path="resources/Results.json" ex="false" tool="3" flavor2="0">
       </item>
       <item path="resources/Session.json" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="say.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="say.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Users.json" ex="false" tool="3" flavor2="0">
       </item>

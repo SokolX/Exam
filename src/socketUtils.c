@@ -48,6 +48,7 @@ int catch_signal(int sig, void (*handler)(int))
  */
 void handle_shutdown(int sig)
 {
+    
     if (listener_d)
         close(listener_d);
 

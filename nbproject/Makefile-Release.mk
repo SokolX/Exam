@@ -35,14 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/bind_to_port.o \
-	${OBJECTDIR}/catch_signal.o \
-	${OBJECTDIR}/hold_api.o \
 	${OBJECTDIR}/komunikat_error.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/open_listener_socket.o \
-	${OBJECTDIR}/read_in.o \
-	${OBJECTDIR}/say.o \
 	${OBJECTDIR}/src/handlingClient.o \
 	${OBJECTDIR}/src/handlingFiles.o \
 	${OBJECTDIR}/src/socketUtils.o
@@ -72,21 +66,6 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/examserver: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/examserver ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/bind_to_port.o: bind_to_port.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bind_to_port.o bind_to_port.c
-
-${OBJECTDIR}/catch_signal.o: catch_signal.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/catch_signal.o catch_signal.c
-
-${OBJECTDIR}/hold_api.o: hold_api.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hold_api.o hold_api.c
-
 ${OBJECTDIR}/komunikat_error.o: komunikat_error.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -96,21 +75,6 @@ ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
-
-${OBJECTDIR}/open_listener_socket.o: open_listener_socket.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/open_listener_socket.o open_listener_socket.c
-
-${OBJECTDIR}/read_in.o: read_in.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/read_in.o read_in.c
-
-${OBJECTDIR}/say.o: say.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/say.o say.c
 
 ${OBJECTDIR}/src/handlingClient.o: src/handlingClient.c 
 	${MKDIR} -p ${OBJECTDIR}/src
