@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=GNU-Linux-x86
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
+CND_PLATFORM_Debug=GNU-Linux
+CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
 CND_ARTIFACT_NAME_Debug=examserver
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/examserver
-CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/examserver
+CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
 CND_PACKAGE_NAME_Debug=examserver.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/examserver.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/examserver.tar
 # Release configuration
-CND_PLATFORM_Release=GNU-Linux-x86
-CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
+CND_PLATFORM_Release=GNU-Linux
+CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
 CND_ARTIFACT_NAME_Release=examserver
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/examserver
-CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/examserver
+CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
 CND_PACKAGE_NAME_Release=examserver.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/examserver.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/examserver.tar
 #
 # include compiler specific variables
 #

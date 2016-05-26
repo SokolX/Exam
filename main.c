@@ -80,13 +80,10 @@ int main(int argc, char *argv[])
 
       /*  while (int i = 0; i < 10; i++) {
             read_in(connect_d, buf, sizeof(buf));
-
             if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
                 say(connect_d, "Odpowiedzi powinny byc jednoliterowe");
-
             else if (say(connect_d, "2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>>") != -1)
                     read_in(connect_d, buf, sizeof(buf));
-
                     if (strlen(buf) == 1)
                         say(connect_d, "Odpowiedzi powinne być jednoliterowe\r\n");
         }*/
@@ -99,5 +96,3 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
-
-
