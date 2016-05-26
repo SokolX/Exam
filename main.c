@@ -17,13 +17,8 @@
 #include <errno.h>
 //każda z funkcji zapisana w oddzielnych plikach .c i .h
 #include "komunikat_error.h"
-#include "read_in.h"
-#include "open_listener_socket.h"
-#include "bind_to_port.h"
-#include "say.h"
 int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
-#include "hold_api.h"
-#include "catch_signal.h"
+#include "src/socketUtils.h"
 
 int main(int argc, char *argv[])
 {

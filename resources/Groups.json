@@ -1,0 +1,13 @@
+{
+    "grupa":{
+        "gr_pierwsza": [
+            {"students":[
+                    {"login":"mariusz"},
+                    {"login":"lukasz"}
+            ]},
+            {"exams":[
+                    {"name":"nazwa_egzaminu", "due_date":"1464604777"}
+            ]}
+        ]
+    }
+}

@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>src/handlingClient.h</itemPath>
+      <itemPath>src/handlingFiles.h</itemPath>
+      <itemPath>src/socketUtils.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -16,6 +19,8 @@
       <itemPath>bind_to_port.h</itemPath>
       <itemPath>catch_signal.c</itemPath>
       <itemPath>catch_signal.h</itemPath>
+      <itemPath>src/handlingClient.c</itemPath>
+      <itemPath>src/handlingFiles.c</itemPath>
       <itemPath>hold_api.c</itemPath>
       <itemPath>hold_api.h</itemPath>
       <itemPath>komunikat_error.c</itemPath>
@@ -27,6 +32,7 @@
       <itemPath>read_in.h</itemPath>
       <itemPath>say.c</itemPath>
       <itemPath>say.h</itemPath>
+      <itemPath>src/socketUtils.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -39,6 +45,12 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>resources/Exams.json</itemPath>
+    <itemPath>resources/Groups.json</itemPath>
+    <itemPath>resources/Questions.json</itemPath>
+    <itemPath>resources/Results.json</itemPath>
+    <itemPath>resources/Session.json</itemPath>
+    <itemPath>src/Users.json</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -79,9 +91,33 @@
       </item>
       <item path="read_in.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="resources/Exams.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Groups.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Questions.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Results.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Session.json" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="say.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="say.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Users.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/handlingClient.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/handlingClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/handlingFiles.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/handlingFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/socketUtils.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/socketUtils.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -130,9 +166,33 @@
       </item>
       <item path="read_in.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="resources/Exams.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Groups.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Questions.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Results.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resources/Session.json" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="say.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="say.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Users.json" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/handlingClient.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/handlingClient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/handlingFiles.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/handlingFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/socketUtils.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/socketUtils.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -1,0 +1,7 @@
+{
+    "user": [
+        {"login":"mariusz", "haslo":"e10adc3949ba59abbe56e057f20f883e", "indeks":"14486", "rola":"0"},
+        {"login":"lukasz", "haslo":"e10adc3949ba59abbe56e057f20f883e", "imie":"Henio", "rola":"1"},
+        {"login":"kamil", "haslo":"e10adc3949ba59abbe56e057f20f883e", "imie":"master", "rola":"2"}
+    ]
+}

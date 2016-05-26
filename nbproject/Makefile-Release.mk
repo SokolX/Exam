@@ -42,7 +42,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/open_listener_socket.o \
 	${OBJECTDIR}/read_in.o \
-	${OBJECTDIR}/say.o
+	${OBJECTDIR}/say.o \
+	${OBJECTDIR}/src/handlingClient.o \
+	${OBJECTDIR}/src/handlingFiles.o \
+	${OBJECTDIR}/src/socketUtils.o
 
 
 # C Compiler Flags
@@ -108,6 +111,21 @@ ${OBJECTDIR}/say.o: say.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/say.o say.c
+
+${OBJECTDIR}/src/handlingClient.o: src/handlingClient.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/handlingClient.o src/handlingClient.c
+
+${OBJECTDIR}/src/handlingFiles.o: src/handlingFiles.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/handlingFiles.o src/handlingFiles.c
+
+${OBJECTDIR}/src/socketUtils.o: src/socketUtils.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/socketUtils.o src/socketUtils.c
 
 # Subprojects
 .build-subprojects:

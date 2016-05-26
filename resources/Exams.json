@@ -1,0 +1,11 @@
+{
+    "name": {
+        "egzam_mat":[
+            {"przedmiot":"matematyka", "id_pytania":"1"},
+            {"przedmiot":"matematyka", "id_pytania":"2"}
+        ],
+        "egzamin_polski":[
+            {"przedmiot":"polski", "id_pytania":"1"}
+        ]
+    }
+}
