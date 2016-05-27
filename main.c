@@ -22,12 +22,18 @@ int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 
 int main(int argc, char *argv[])
 {
-
+    if(argc!=2){
+        printf("Uzycie: %s <port>\n", argv[0]);
+        exit(1);
+    }
+    
+    int port = atoi(argv[1]);
+    
     if(catch_signal(SIGINT, handle_shutdown) == -1)
         error("\nNie można ustawić procedury obsługi przerwania");
     
     listener_d = open_listener_socket();
-    bind_to_port(listener_d, 30000); //port 30000
+    bind_to_port(listener_d, port);
     if (listen(listener_d, 10) == -1) //utw kolejki 10 el
         error("Nie można odbierać połączeń");
 
@@ -49,12 +55,12 @@ int main(int argc, char *argv[])
  
             read_in(connect_d, buf, sizeof(buf));         
 
-            say(connect_d, logInChecker(buf));
+            //say(connect_d, logInChecker(buf));
             
-            if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
+            /*if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
                 say(connect_d, "Odpowiedzi powinny byc jednoliterowe");
 
-            else if (say(connect_d, "2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>>") != -1)
+            else if (say(connect_d, "2 + 2 = ?\ra) 1\rb) 2\nc) 3\nd) 4\r\n>>") != -1)
                     read_in(connect_d, buf, sizeof(buf));
 
                     if (strlen(buf) == 1)
@@ -74,7 +80,7 @@ int main(int argc, char *argv[])
                         say(connect_d, "Odpowiedzi powinne być jednoliterowe\r\n");
                 }
 
-                /*  while (int i = 0; i < 10; i++) {
+                  while (int i = 0; i < 10; i++) {
                     read_in(connect_d, buf, sizeof(buf));
                     if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
                         say(connect_d, "Odpowiedzi powinny byc jednoliterowe");
@@ -82,8 +88,8 @@ int main(int argc, char *argv[])
                             read_in(connect_d, buf, sizeof(buf));
                             if (strlen(buf) == 1)
                                 say(connect_d, "Odpowiedzi powinne być jednoliterowe\r\n");
-                }*/
-            }
+                }
+            }*/
 
             close(connect_d);
             exit(0);
