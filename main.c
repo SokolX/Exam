@@ -21,13 +21,18 @@ int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 
 
 int main(int argc, char *argv[])
-{
-    if(argc!=2){
-        printf("Uzycie: %s <port>\n", argv[0]);
-        exit(1);
-    }
+{   
+    //deklaracja zmiennej przechowujacej numer portu
+    int port;
     
-    int port = atoi(argv[1]);
+    //jezeli w wierszu wywolania zostanie podany port to przypisz do zmienenj port
+    //w przeciwnym razie port = 30000
+    if(argc == 2){
+        port = atoi(argv[1]);
+    }
+    else{
+        port = 30000;
+    }
     
     if(catch_signal(SIGINT, handle_shutdown) == -1)
         error("\nNie można ustawić procedury obsługi przerwania");
