@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-
+char* logInChecker(char* buf);
 
 
 #ifdef __cplusplus

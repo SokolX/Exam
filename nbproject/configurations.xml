@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>src/handlingClient.h</itemPath>
       <itemPath>src/handlingFiles.h</itemPath>
+      <itemPath>src/jsonParser.h</itemPath>
       <itemPath>src/socketUtils.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -17,9 +18,11 @@
                    projectFiles="true">
       <itemPath>src/handlingClient.c</itemPath>
       <itemPath>src/handlingFiles.c</itemPath>
+      <itemPath>src/jsonParser.c</itemPath>
       <itemPath>komunikat_error.c</itemPath>
       <itemPath>komunikat_error.h</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>newmain.c</itemPath>
       <itemPath>src/socketUtils.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -53,11 +56,32 @@
           <commandlineTool>gcc</commandlineTool>
         </cTool>
       </compileType>
+      <packaging>
+        <packType>Debian</packType>
+        <output>out/main</output>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="out/main"
+                            from="out/main"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+        <packInfoList>
+          <packInfoListElem name="Package" value="examserver" mandatory="true"/>
+          <packInfoListElem name="Version" value="1.0" mandatory="true"/>
+          <packInfoListElem name="Architecture" value="amd64" mandatory="false"/>
+          <packInfoListElem name="Maintainer" value="mariusz" mandatory="false"/>
+          <packInfoListElem name="Description" value="..." mandatory="false"/>
+        </packInfoList>
+      </packaging>
       <item path="komunikat_error.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="komunikat_error.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="newmain.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="resources/Exams.json" ex="false" tool="3" flavor2="0">
       </item>
@@ -78,6 +102,10 @@
       <item path="src/handlingFiles.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/handlingFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/jsonParser.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/jsonParser.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/socketUtils.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -104,11 +132,25 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <packaging>
+        <packType>Tar</packType>
+        <output>out/main</output>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+      </packaging>
       <item path="komunikat_error.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="komunikat_error.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="newmain.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="resources/Exams.json" ex="false" tool="3" flavor2="0">
       </item>
@@ -129,6 +171,10 @@
       <item path="src/handlingFiles.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/handlingFiles.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/jsonParser.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/jsonParser.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/socketUtils.c" ex="false" tool="0" flavor2="0">
       </item>

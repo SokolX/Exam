@@ -37,8 +37,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/komunikat_error.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/newmain.o \
 	${OBJECTDIR}/src/handlingClient.o \
 	${OBJECTDIR}/src/handlingFiles.o \
+	${OBJECTDIR}/src/jsonParser.o \
 	${OBJECTDIR}/src/socketUtils.o
 
 
@@ -76,6 +78,11 @@ ${OBJECTDIR}/main.o: main.c
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
 
+${OBJECTDIR}/newmain.o: newmain.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/newmain.o newmain.c
+
 ${OBJECTDIR}/src/handlingClient.o: src/handlingClient.c 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -85,6 +92,11 @@ ${OBJECTDIR}/src/handlingFiles.o: src/handlingFiles.c
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/handlingFiles.o src/handlingFiles.c
+
+${OBJECTDIR}/src/jsonParser.o: src/jsonParser.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/jsonParser.o src/jsonParser.c
 
 ${OBJECTDIR}/src/socketUtils.o: src/socketUtils.c 
 	${MKDIR} -p ${OBJECTDIR}/src

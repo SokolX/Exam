@@ -18,6 +18,7 @@
 #include "komunikat_error.h"
 int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 #include "src/socketUtils.h"
+#include "src/handlingClient.h"
 
 
 int main(int argc, char *argv[])
@@ -58,9 +59,9 @@ int main(int argc, char *argv[])
 
             //if (say(connect_d, "Czas zacząć egzamin testowy\n - Egzamin jednokrotnego wyboru\n2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>") != -1)
  
-            read_in(connect_d, buf, sizeof(buf));         
-
-            //say(connect_d, logInChecker(buf));
+            read_in(connect_d, buf, sizeof(buf));
+            
+            say(connect_d, logInChecker(buf));
             
             /*if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
                 say(connect_d, "Odpowiedzi powinny byc jednoliterowe");

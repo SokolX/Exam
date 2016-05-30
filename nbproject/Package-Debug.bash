@@ -15,7 +15,7 @@ NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
 OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/examserver
 OUTPUT_BASENAME=examserver
-PACKAGE_TOP_DIR=examserver/
+PACKAGE_TOP_DIR=/usr/
 
 # Functions
 function checkReturnCode
@@ -54,22 +54,39 @@ function copyFileToTmpDir
 
 # Setup
 cd "${TOP}"
-mkdir -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package
+mkdir -p out
 rm -rf ${NBTMPDIR}
 mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/examserver/bin"
-copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+makeDirectory "${NBTMPDIR}/out"
+copyFileToTmpDir "out/main" "${NBTMPDIR}/out/main" 0644
 
 
-# Generate tar file
+# Create control file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/examserver.tar
-cd ${NBTMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/examserver.tar *
+CONTROL_FILE=${NBTMPDIR}/DEBIAN/control
+rm -f ${CONTROL_FILE}
+mkdir -p ${NBTMPDIR}/DEBIAN
+
+cd "${TOP}"
+echo 'Package: examserver' >> ${CONTROL_FILE}
+echo 'Version: 1.0' >> ${CONTROL_FILE}
+echo 'Architecture: amd64' >> ${CONTROL_FILE}
+echo 'Maintainer: mariusz' >> ${CONTROL_FILE}
+echo 'Description: ...' >> ${CONTROL_FILE}
+
+# Create Debian Package
+cd "${TOP}"
+cd "${NBTMPDIR}/.."
+dpkg-deb  --build ${TMPDIRNAME}
 checkReturnCode
+cd "${TOP}"
+mkdir -p  out
+mv ${NBTMPDIR}.deb out/main
+checkReturnCode
+echo Debian: out/main
 
 # Cleanup
 cd "${TOP}"
