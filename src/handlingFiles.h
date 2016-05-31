@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-int checkUserCredentials(char* login, char* password, json_object * jobj);
+int checkUserCredentials(const char* login, const char* password);
 
 
 #ifdef __cplusplus

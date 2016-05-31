@@ -6,7 +6,6 @@
 
 #include <json/json.h>
 #include <stdio.h>
-#include <json-c/json_object.h>
 #include <string.h>
 
 /*printing the value corresponding to boolean, double, integer and strings*/

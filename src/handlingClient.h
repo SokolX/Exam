@@ -17,9 +17,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+    
 char* logInChecker(char* buf);
-
+int getClientInstruction(char* buf);
 
 #ifdef __cplusplus
 }

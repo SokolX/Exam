@@ -57,45 +57,30 @@ int main(int argc, char *argv[])
         if (!fork()) {
             close(listener_d);
 
-            //if (say(connect_d, "Czas zacząć egzamin testowy\n - Egzamin jednokrotnego wyboru\n2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>") != -1)
- 
             read_in(connect_d, buf, sizeof(buf));
             
-            say(connect_d, logInChecker(buf));
+            //sprawdzanie czego klienta zada
+            int selector = getClientInstruction(buf);
             
-            /*if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
-                say(connect_d, "Odpowiedzi powinny byc jednoliterowe");
-
-            else if (say(connect_d, "2 + 2 = ?\ra) 1\rb) 2\nc) 3\nd) 4\r\n>>") != -1)
-                    read_in(connect_d, buf, sizeof(buf));
-
-                    if (strlen(buf) == 1)
-                        say(connect_d, "Odpowiedzi powinne być jednoliterowe\r\n");
-
-            else {
-                if (say(connect_d, "2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>>") != -1)
-                    read_in(connect_d, buf, sizeof(buf));
-
-                    if (strlen(buf) == 1)
-                        say(connect_d, "Odpowiedzi powinne być jednoliterowe\r\n");
-
-               else if (say(connect_d, "2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>>") != -1) {
-                    read_in(connect_d, buf, sizeof(buf));
-
-                    if (strlen(buf) == 1)
-                        say(connect_d, "Odpowiedzi powinne być jednoliterowe\r\n");
-                }
-
-                  while (int i = 0; i < 10; i++) {
-                    read_in(connect_d, buf, sizeof(buf));
-                    if (strlen(buf) == 1) //sizeof musi być == podanej odp z klienta
-                        say(connect_d, "Odpowiedzi powinny byc jednoliterowe");
-                    else if (say(connect_d, "2 + 2 = ?\na) 1\nb) 2\nc) 3\nd) 4\r\n>>") != -1)
-                            read_in(connect_d, buf, sizeof(buf));
-                            if (strlen(buf) == 1)
-                                say(connect_d, "Odpowiedzi powinne być jednoliterowe\r\n");
-                }
-            }*/
+            //wybór odpowiedniej akcji na podstawie zadania
+            switch(selector){
+                case 6:
+                    say(connect_d, logInChecker(buf));
+                    break;
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                default:
+                    say(connect_d, "Nie rozpoznano komunikatu");
+                    break;
+            }
 
             close(connect_d);
             exit(0);
