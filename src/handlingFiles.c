@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 
+#include <json-c/json_object.h>
+
 #include "json/json.h"
 
 int checkUserCredentials(const char* login, const char* password){
-    
+
     json_object *jvalue, *user, *plik;
     
     //parsowanie zawartosci pliku User.json
@@ -23,17 +25,23 @@ int checkUserCredentials(const char* login, const char* password){
         user = json_object_array_get_idx(jvalue, i);
         
         /*For po kluczach kazdego uzytkownika*/
-        json_object_object_foreach(user, key2, val2){ 
-            const char* value = json_object_get_string(val2);
+        json_object_object_foreach(user, key, val){ 
+            const char* value = json_object_get_string(val);
 
-            if( strcmp(key2, "login") == 0 && strcmp(value, login) != 0 )
+            if( strcmp(key, "login") == 0 && strcmp(value, login) != 0 )
                 break;
 
-            if( strcmp(key2, "haslo") == 0 && strcmp(value, password) == 0 )
-                return 1;
+            if( strcmp(key, "haslo") == 0 ) {
+                if ( !(strcmp(value, password) == 0) )
+                    return -1;
+            }
+            
+            if ( strcmp(key, "rola") == 0 ){
+                return json_object_get_int(val);
+            }
+
         }
     }
-    
-    return 0;
+    return -1;
     
 }

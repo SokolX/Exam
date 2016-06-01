@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/handlingClient.o \
 	${OBJECTDIR}/src/handlingFiles.o \
 	${OBJECTDIR}/src/jsonParser.o \
+	${OBJECTDIR}/src/md5Converter.o \
 	${OBJECTDIR}/src/socketUtils.o
 
 
@@ -97,6 +98,11 @@ ${OBJECTDIR}/src/jsonParser.o: src/jsonParser.c
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/jsonParser.o src/jsonParser.c
+
+${OBJECTDIR}/src/md5Converter.o: src/md5Converter.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/md5Converter.o src/md5Converter.c
 
 ${OBJECTDIR}/src/socketUtils.o: src/socketUtils.c 
 	${MKDIR} -p ${OBJECTDIR}/src

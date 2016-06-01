@@ -7,6 +7,7 @@
       <itemPath>src/handlingClient.h</itemPath>
       <itemPath>src/handlingFiles.h</itemPath>
       <itemPath>src/jsonParser.h</itemPath>
+      <itemPath>src/md5Converter.h</itemPath>
       <itemPath>src/socketUtils.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -22,6 +23,7 @@
       <itemPath>komunikat_error.c</itemPath>
       <itemPath>komunikat_error.h</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>src/md5Converter.c</itemPath>
       <itemPath>newmain.c</itemPath>
       <itemPath>src/socketUtils.c</itemPath>
     </logicalFolder>
@@ -107,6 +109,10 @@
       </item>
       <item path="src/jsonParser.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/md5Converter.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/md5Converter.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/socketUtils.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/socketUtils.h" ex="false" tool="3" flavor2="0">
@@ -175,6 +181,10 @@
       <item path="src/jsonParser.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/jsonParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/md5Converter.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/md5Converter.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/socketUtils.c" ex="false" tool="0" flavor2="0">
       </item>

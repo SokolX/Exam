@@ -7,6 +7,9 @@
 #include <json-c/linkhash.h>
 #include "json/json.h"
 #include "handlingFiles.h"
+#include "md5Converter.h"
+#include <time.h>
+#include <stdlib.h>
 
 int getClientInstruction(char* buf){
     //nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
@@ -59,8 +62,15 @@ char* logInChecker(char* buf){
     user = json_object_get_string(login);
     pass = json_object_get_string(haslo);
     
-    if ( checkUserCredentials(user, pass) == 1 )
-        return "{\"message\":\"zalogowano\"}";
+    int rola = checkUserCredentials(user, pass);
+    if ( rola >= 0 ){
+        int tim = (int)time(NULL);
+        char* buf;
+        // logowanie, wpis od Session, konkatenacja timestamp'a z rola
+        itoa(tim, buf, 10);
+        
+        return str2md5(buf);
+    }
     else
-        return "{\"message\":\"podano bledne dane\"}";
+        return "{\"message\":\"Podano bledne dane.\"}";
 }
