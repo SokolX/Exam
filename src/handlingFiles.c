@@ -5,6 +5,7 @@
  */
 
 #include <json-c/json_object.h>
+#include <json-c/json_util.h>
 
 #include "json/json.h"
 
@@ -44,4 +45,43 @@ int checkUserCredentials(const char* login, const char* password){
     }
     return -1;
     
+}
+
+void addSession(char* id_sesji, char* login, char* rola){
+    
+    json_object *plik, *wpis, *sesja, *new_file_content;
+    char* fileName = "../resources/Session.json";
+    
+    //pobranie struktury z pliku Session.json
+    plik = json_object_from_file(fileName);
+    
+    //stworzenie obieku JSONa
+    wpis = json_object_new_object();
+    new_file_content = json_object_new_object();
+    
+    //dodanie wpisow do obiektu
+    addJsonObject(wpis, "id", id_sesji);
+    addJsonObject(wpis, "login", login);
+    addJsonObject(wpis, "rola", rola);
+    
+    //pobranie tablicy 'sesja'
+    sesja = json_object_object_get(plik, "sesja");
+    
+    //dodanie do tablicy wpisu z nowym id_sesji
+    json_object_array_add(sesja, wpis);
+    
+    //zapisanie w obiekcie JSON nowej tresci pliku
+    json_object_object_add(new_file_content, "sesja", sesja);
+    
+    //zrzucenie tresci do pliku razem z formatowaniem
+    json_object_to_file_ext(fileName, new_file_content,  JSON_C_TO_STRING_PRETTY);
+    
+}
+
+static void addJsonObject(json_object *jobj, char *key, char *val) {
+      //utworzenie obiektu
+      json_object *jstring = json_object_new_string(val);
+
+      //forma jsonowa
+      json_object_object_add(jobj,key, jstring);
 }
