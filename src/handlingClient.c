@@ -10,6 +10,8 @@
 #include "md5Converter.h"
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 int getClientInstruction(char* buf){
     //nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
@@ -63,14 +65,52 @@ char* logInChecker(char* buf){
     pass = json_object_get_string(haslo);
     
     int rola = checkUserCredentials(user, pass);
+    int tim = (int)time(NULL);
+    
     if ( rola >= 0 ){
-        int tim = (int)time(NULL);
-        char* buf;
-        // logowanie, wpis od Session, konkatenacja timestamp'a z rola
-        itoa(tim, buf, 10);
+        char* md5 = str2md5( int2char(tim) );
+        //rola jest dolaczana do md5 po jej utworzeniu
+        char* id_sesji = strcat( md5 , int2char(rola) );
+        char* srv_response;
         
-        return str2md5(buf);
+        //strdup: pozbycie sie const
+        addSession(id_sesji, strdup(user), int2char(rola));
+        
+        //generowanie odpowiedzi do klienta
+        json_object *message = json_object_new_object();
+        
+        //dodanie do obiektu JSON klucza "message" i wartosci będącej id_sesji
+        addJsonObject(message, "message", id_sesji);
+        
+        srv_response = strdup(json_object_get_string(message));
+        
+        //pisanie do loga
+        writeToLog(tim, buf, srv_response);
+        
+        return srv_response;
     }
-    else
-        return "{\"message\":\"Podano bledne dane.\"}";
+    else{
+        char* message = "{ \"error\": \"Podano bledne dane.\" }";
+        writeToLog(tim, buf, message);
+        return message;
+    }
+}
+
+char* int2char(int i){
+    char* str = malloc(16);
+    snprintf(str, 16, "%d", i);
+    
+    return str;
+}
+
+int writeToLog(int timestamp, char* client_message, char* srv_response){
+    FILE *log;
+    char* file_name = "../resources/log.txt";
+    
+    //otwieranie pliku do dodawania
+    log = fopen(file_name, "a");
+    
+    fprintf(log, "%d; %s; %s\n", timestamp, client_message, srv_response);
+    
+    return fclose(log);
 }

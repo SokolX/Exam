@@ -20,6 +20,8 @@ extern "C" {
     
 char* logInChecker(char* buf);
 int getClientInstruction(char* buf);
+char* int2char(int i);
+int writeToLog(int timestamp, char* client_message, char* srv_response);
 
 #ifdef __cplusplus
 }
