@@ -19,6 +19,8 @@ extern "C" {
 #endif
 
 int checkUserCredentials(const char* login, const char* password);
+void addSession(char* id_sesji, char* login, char* rola);
+static void addJsonObject(json_object *jobj, char *key, char *val);
 
 
 #ifdef __cplusplus
