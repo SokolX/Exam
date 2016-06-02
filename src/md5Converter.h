@@ -18,9 +18,9 @@
 extern "C" {
 #endif
     
-#include "md5Converter.h"
+#include "md5Converter.c"
 
-char *str2md5(const char *str);
+char *str2md5(char *str);
 
 
 #ifdef __cplusplus

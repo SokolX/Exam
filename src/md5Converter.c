@@ -14,7 +14,7 @@
 #include <openssl/md5.h>
 #endif
 
-char *str2md5(const char *str) {
+char *str2md5(char *str) {
     int n;
     int length = strlen(str);
     MD5_CTX c;
