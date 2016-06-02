@@ -1,6 +1,34 @@
 {
-    "sesja": [
-        {"id":"jkhasdfghjghj", "login":"mariusz", "rola":"0"},
-        {"id":"jnhjbahjsbdfn", "login":"lukasz", "rola":"1"}
-    ]
+  "sesja":[
+    {
+      "id":"jkhasdfghjghj",
+      "login":"mariusz",
+      "rola":"0"
+    },
+    {
+      "id":"jnhjbahjsbdfn",
+      "login":"lukasz",
+      "rola":"1"
+    },
+    {
+      "id":"b47dc27e504bc5e119852f7100f89f8c0",
+      "login":"mariusz",
+      "rola":"0"
+    },
+    {
+      "id":"b7fb56228482af03f66a08aa4ef2a82f0",
+      "login":"mariusz",
+      "rola":"0"
+    },
+    {
+      "id":"452c9be7cc72e51fef6bef26349e315f0",
+      "login":"mariusz",
+      "rola":"0"
+    },
+    {
+      "id":"370da044c10a0cd8b73d115646a9a9020",
+      "login":"mariusz",
+      "rola":"0"
+    }
+  ]
 }
