@@ -10,7 +10,10 @@
  *
  * Created on June 1, 2016, 7:59 PM
  */
-
+/**
+ * \file md5Converter.h
+ * \brief Plik nagłówkowy dla pliku "md5Converter.c"
+ */
 #ifndef MD5CONVERTER_H
 #define MD5CONVERTER_H
 

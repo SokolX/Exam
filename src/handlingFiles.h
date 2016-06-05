@@ -10,7 +10,10 @@
  *
  * Created on May 26, 2016, 3:10 PM
  */
-
+/**
+ * \file handlingFiles.h
+ * \brief Plik nagłówkowy dla pliku "handlingFiles.c"
+ */
 #ifndef HANDLINGFILES_H
 #define HANDLINGFILES_H
 

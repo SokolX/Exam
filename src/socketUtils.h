@@ -10,7 +10,10 @@
  *
  * Created on May 26, 2016, 2:47 PM
  */
-
+/**
+ * \file socketUtils.h
+ * \brief Plik nagłówkowy dla pliku "socketUtils.c"
+ */
 #ifndef SOCKETUTILS_H
 #define SOCKETUTILS_H
 

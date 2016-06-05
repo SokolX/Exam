@@ -1,11 +1,17 @@
-/* 
- * File:   main.c
- * Author: sokolx
- *
- * Created on 23 maj 2016, 18:24
+/**
+ * \mainpage
+ * \authors
+ *  Mariusz Czabaj \n
+ *  Łukasz Sokołek
+ * \date 4.06.2016
+ * \version 1.0
+ * \par Kontakt
+ * \a czabaj@wit.edu.pl \n
+ * \a sokolek@wit.edu.pl
+ * 
+ * \file main.c
+ * \brief Główny plik wykonywalny
  */
-
-//potrzebne biblioteki
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -16,6 +22,7 @@
 #include <signal.h>
 #include <errno.h>
 #include "komunikat_error.h"
+///zmienna przechowująca główne gniazdo odbiorcze servera do odbierania połączeń (deskryptor gniazda)
 int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 #include "src/socketUtils.h"
 #include "src/handlingClient.h"

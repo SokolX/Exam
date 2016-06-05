@@ -10,7 +10,10 @@
  *
  * Created on May 26, 2016, 3:11 PM
  */
-
+/**
+ * \file handlingClient.h
+ * \brief Plik nagłówkowy dla pliku "handlingClient.c"
+ */
 #ifndef HANDLINGCLIENT_H
 #define HANDLINGCLIENT_H
 

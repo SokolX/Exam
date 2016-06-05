@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * \file jsonParser.c
+ * \brief Plik zawierający metody wykonujące operacje na plikach typu *.json
  */
-
 #include <json/json.h>
 #include <stdio.h>
 #include <string.h>

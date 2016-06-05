@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * \file handlingClient.c
+ * \brief Główny plik zawierający metody obsługujące żądania ze 
+ * strony klienta. 
  */
 
 #include <json-c/linkhash.h>
@@ -12,13 +12,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
+/**
+ * Metoda, której głównym zadaniem jest obsługa żądań klienta. Każde z żądań 
+ * jest traktowana jako oddzielna instrukacja. 
+ * @param buf
+ * @return 
+ */
 int getClientInstruction(char* buf){
     //nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
     int tab_len = 11;
     int i;
     
-    //inicjalizacja listy komunikatow
+    //!< Brief description after the member
     char* instructions[]={  "add_student",
                             "add_redactor",
                             "add_group",
@@ -29,10 +34,9 @@ int getClientInstruction(char* buf){
                             "add_answear",
                             "get_answear",
                             "assign_exam_to_group",
-                            "log_out"};
-    
+                            "log_out"}; //**!< Detailed description after the member 
     //parsowanie komunikatu
-    struct json_object *jarray = json_tokener_parse(buf);
+    struct json_object *jarray = json_tokener_parse(buf); 
 
     //wyluskanie stringa z trescia komunikatu
     const char *instr = (char*)(json_object_get_object(jarray)->head)->k;
@@ -42,10 +46,17 @@ int getClientInstruction(char* buf){
             return i;
     }
     
-    return 0;
-    
+    return 0; 
 }
-
+/*!< To jest krótki opis zmiennej */
+/**
+ * Metoda obsługująca logowanie - cały proces uwierzytelniający użytkownika 
+ * w systemie. Metoda przyjmuje informacje od klienta o loginie i haśle (MD5) 
+ * w postaci ciągu znaków typu json i sprawdza zgodność podanych danych z . 
+ * plikie Users.json, w którym znajdują się dane o użytkownikach systemu. 
+ * @param buf - zawiera dane w formacie json do logawania podane przez użytkownika
+ * @return 
+ */
 char* logInChecker(char* buf){
     json_object *obj, *login, *haslo;
     const char *user, *pass;
@@ -65,7 +76,7 @@ char* logInChecker(char* buf){
     pass = json_object_get_string(haslo);
     
     int rola = checkUserCredentials(user, pass);
-    int tim = (int)time(NULL);
+    int tim = time(NULL);
     
     if ( rola >= 0 ){
         char* md5 = str2md5( int2char(tim) );
@@ -95,21 +106,36 @@ char* logInChecker(char* buf){
         return message;
     }
 }
-
+/**
+ * Metoda zamieniająca liczbę typu int na ciąg znaków typu char.
+ * Wykorzystywana przy tworzeniu hash'y. 
+ * @param i - liczba do zamiany 
+ * @return 
+ */
 char* int2char(int i){
     char* str = malloc(16);
     snprintf(str, 16, "%d", i);
-    
-    return str;
+        /* @param str - cięg znaków typu char */
+    return str; 
 }
 
-int writeToLog(int timestamp, char* client_message, char* srv_response){
-    FILE *log;
-    char* file_name = "../resources/log.txt";
-    
+/**
+ * Metoda służąca do logowania informacji o działaniach klienta na serwerze. 
+ * Każde z działanie klienta będzie logowane w pliku log.txt w katalogu resources. 
+ * W pliku logowane będą: \n 
+ * - czas żądania \n 
+ * - informację o rodzaju żądania do serwera \n 
+ * - odpowiedź do klienta jakiej udzielił serwer. 
+ * @param timestamp - zwraca czas żądania w sekundach
+ * @param *client_message - informacja o żądaniu od klienta
+ * @param *serv_response - jaką informację wysłał klientowi serwer
+
+ */
+int writeToLog(int timestamp, char* client_message, char* srv_response) {
+    FILE *log; ///< FILE 
+    char* file_name = "./resources/log.txt";    
     //otwieranie pliku do dodawania
     log = fopen(file_name, "a");
-    
     fprintf(log, "%d; %s; %s\n", timestamp, client_message, srv_response);
     
     return fclose(log);

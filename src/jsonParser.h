@@ -10,7 +10,10 @@
  *
  * Created on May 30, 2016, 7:51 PM
  */
-
+/**
+ * \file jsonParser.h
+ * \brief Plik nagłówkowy dla pliku "jsonParser.c"
+ */
 #ifndef JSONPARSER_H
 #define JSONPARSER_H
 

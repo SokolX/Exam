@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * \file md5Converter.c
+ * \brief Plik zawierający metodę *str2md5, która po stronie Servera odpowiada
+ * za generowanie hash'y md5. 
  */
 
-#include <stdlib.h>
-#include <string.h>
 #if defined(__APPLE__)
 #  define COMMON_DIGEST_FOR_OPENSSL
 #  include <CommonCrypto/CommonDigest.h>

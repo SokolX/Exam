@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * \file handlingFiles.c
+ * \brief Plik zawierający metodę obsłującą poprawność logowania
  */
-
 #include <json-c/json_object.h>
 #include <json-c/json_util.h>
 
@@ -14,7 +12,7 @@ int checkUserCredentials(const char* login, const char* password){
     json_object *jvalue, *user, *plik;
     
     //parsowanie zawartosci pliku User.json
-    plik = json_object_from_file("../resources/Users.json");
+    plik = json_object_from_file("./resources/Users.json");
     
     //wydobywanie tablicy uzytkownikow
     jvalue = json_object_object_get(plik, "user");
@@ -50,7 +48,7 @@ int checkUserCredentials(const char* login, const char* password){
 void addSession(char* id_sesji, char* login, char* rola){
     
     json_object *plik, *wpis, *sesja, *new_file_content;
-    char* fileName = "../resources/Session.json";
+    char* fileName = "./resources/Session.json";
     
     //pobranie struktury z pliku Session.json
     plik = json_object_from_file(fileName);
