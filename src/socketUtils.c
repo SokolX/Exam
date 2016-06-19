@@ -63,7 +63,7 @@ void handle_shutdown(int sig)
     if (listener_d)
         close(listener_d);  //zamyka połącznie
 
-    fprintf(stderr, "\nZakończono dziłanie aplikacji na żądanie\n");
+    fprintf(stderr, "\nZakończono działanie aplikacji na żądanie\n");
     exit(0);
 }
 
