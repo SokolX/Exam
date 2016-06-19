@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 /**
  * Metoda, której głównym zadaniem jest obsługa żądań klienta. Każde z żądań 
  * jest traktowana jako oddzielna instrukacja. 
@@ -48,6 +49,7 @@ int getClientInstruction(char* buf){
     
     return 0; 
 }
+
 /*!< To jest krótki opis zmiennej */
 /**
  * Metoda obsługująca logowanie - cały proces uwierzytelniający użytkownika 
@@ -85,15 +87,15 @@ char* logInChecker(char* buf){
         char* srv_response;
         
         //strdup: pozbycie sie const
-        addSession(id_sesji, strdup(user), int2char(rola));
+        addSession(id_sesji, strdup(user), int2char(rola), tim);
         
         //generowanie odpowiedzi do klienta
         json_object *message = json_object_new_object();
         
         //dodanie do obiektu JSON klucza "message" i wartosci będącej id_sesji
-        addJsonObject(message, "message", id_sesji);
-        
-        srv_response = strdup(json_object_get_string(message));
+        addJsonObject(message, "logged", id_sesji);
+
+        srv_response = strdup( json_object_get_string(message) );
         
         //pisanie do loga
         writeToLog(tim, buf, srv_response);
@@ -106,6 +108,7 @@ char* logInChecker(char* buf){
         return message;
     }
 }
+
 /**
  * Metoda zamieniająca liczbę typu int na ciąg znaków typu char.
  * Wykorzystywana przy tworzeniu hash'y. 
@@ -133,10 +136,36 @@ char* int2char(int i){
  */
 int writeToLog(int timestamp, char* client_message, char* srv_response) {
     FILE *log; ///< FILE 
-    char* file_name = "./resources/log.txt";    
+    char* file_name = "../resources/log.txt";    
     //otwieranie pliku do dodawania
     log = fopen(file_name, "a");
     fprintf(log, "%d; %s; %s\n", timestamp, client_message, srv_response);
     
     return fclose(log);
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* loggingOut(char* buf){
+    json_object *session;
+    char* session_id, *srv_response;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "log_out");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    srv_response = removeSession(session_id);
+    
+    //pisanie do loga
+    writeToLog(time(NULL), buf, srv_response);
+    
+    return srv_response;
 }

@@ -74,7 +74,9 @@ int main(int argc, char *argv[])
                 case 6:
                     say(connect_d, logInChecker(buf));
                     break;
-                case 0:
+                case 10:
+                    say(connect_d, loggingOut(buf));
+                    break;
                 case 1:
                 case 2:
                 case 3:
@@ -83,7 +85,7 @@ int main(int argc, char *argv[])
                 case 7:
                 case 8:
                 case 9:
-                case 10:
+                case 0:
                 default:
                     say(connect_d, "Nie rozpoznano komunikatu");
                     break;
