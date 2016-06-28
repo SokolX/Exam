@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
     //deklaracja zmiennej przechowujacej numer portu
     int port;
     
+    char* message = NULL;
+    
     //jezeli w wierszu wywolania zostanie podany port to przypisz do zmienenj port
     //w przeciwnym razie port = 30000
     if(argc == 2){
@@ -71,23 +73,26 @@ int main(int argc, char *argv[])
             
             //wybór odpowiedniej akcji na podstawie zadania
             switch(selector){
+                case 2:
+                    say(connect_d, addingGroup(buf));
+                    break;
                 case 6:
                     say(connect_d, logInChecker(buf));
                     break;
-                case 10:
+                case 9:
                     say(connect_d, loggingOut(buf));
                     break;
                 case 1:
-                case 2:
                 case 3:
                 case 4:
                 case 5:
                 case 7:
                 case 8:
-                case 9:
                 case 0:
                 default:
-                    say(connect_d, "Nie rozpoznano komunikatu");
+                    message = "{ \"error\": \"Nie rozpoznano komunikatu.\" }";
+                    writeToLog(time(NULL), buf, message);
+                    say(connect_d, message);
                     break;
             }
 
