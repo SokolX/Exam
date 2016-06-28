@@ -137,3 +137,41 @@ char* removeSession(char* id){
     
     return status;
 }
+
+int addGroup(char* nazwa_gr){
+    json_object *examsArr, *studentsArr, *groupArr, *grFile, *newFileContent, *newGroup, *newObj;
+    char* fileName = "../resources/Groups.json";
+    
+    examsArr = json_object_new_object();
+    studentsArr = json_object_new_object();
+    newGroup = json_object_new_array();
+    newFileContent = json_object_new_object();
+    newObj = json_object_new_object();
+    
+    //pobranie struktury z pliku Groups.json
+    grFile = json_object_from_file(fileName);
+    
+    //pobranie tablicy 'grupa'
+    groupArr = json_object_object_get(grFile, "grupa");
+    
+    json_object_object_add(studentsArr, "students", json_object_new_array());
+    json_object_object_add(examsArr, "exams", json_object_new_array());
+    
+    //utworzenie struktury nowej grupy
+    json_object_array_add(newGroup, studentsArr);
+    json_object_array_add(newGroup, examsArr);
+    
+    //utworzenie nowego obiektu grupy wraz z nazwa
+    json_object_object_add(newObj, nazwa_gr, newGroup);
+    
+    //dodanie do aktualnych grup nowej z pustymi tablicami students i exams
+    json_object_array_add(groupArr, newObj);
+    
+    //utworzenie obiektu gotowego do zrzucenia do pliku
+    json_object_object_add(newFileContent, "grupa", groupArr);
+    
+    //zrzucenie tresci z usunietym wpisem sesji do pliku razem z formatowaniem
+    json_object_to_file_ext(fileName, newFileContent,  JSON_C_TO_STRING_PRETTY);
+    
+    return 1;
+}
