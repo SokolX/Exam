@@ -13,6 +13,22 @@
 #include <stdio.h>
 #include <string.h>
 
+//nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
+int tab_len = 11;
+//!< Brief description after the member
+char* instructions[]={  "1view_results", //0
+                        "0get_exams", //1
+                        "2add_group", //2
+                        "2assign_to_group", //3
+                        "1check_answears", //4
+                        "1add_exam", //5
+                        "3log_in", //6
+                        "0add_answear", //7
+                        "0get_answear", //8
+                        "3log_out", //9
+                        "1assign_exam_to_group" //10
+}; //**!< Detailed description after the member 
+
 /**
  * Metoda, której głównym zadaniem jest obsługa żądań klienta. Każde z żądań 
  * jest traktowana jako oddzielna instrukacja. 
@@ -20,22 +36,8 @@
  * @return 
  */
 int getClientInstruction(char* buf){
-    //nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
-    int tab_len = 11;
     int i;
     
-    //!< Brief description after the member
-    char* instructions[]={  "add_student",
-                            "add_redactor",
-                            "add_group",
-                            "assign_to_group",
-                            "check_answears",
-                            "add_exam",
-                            "log_in",
-                            "add_answear",
-                            "get_answear",
-                            "assign_exam_to_group",
-                            "log_out"}; //**!< Detailed description after the member 
     //parsowanie komunikatu
     struct json_object *jarray = json_tokener_parse(buf); 
 
@@ -43,11 +45,11 @@ int getClientInstruction(char* buf){
     const char *instr = (char*)(json_object_get_object(jarray)->head)->k;
     
     for(i=0; i<tab_len; i++){
-        if( strcmp(instr, instructions[i]) == 0 )
+        if( strcmp(instr, &instructions[i][1]) == 0 )
             return i;
     }
     
-    return 0; 
+    return -1; 
 }
 
 /*!< To jest krótki opis zmiennej */
@@ -96,9 +98,6 @@ char* logInChecker(char* buf){
         addJsonObject(message, "logged", id_sesji);
 
         srv_response = strdup( json_object_get_string(message) );
-        
-        //pisanie do loga
-        writeToLog(tim, buf, srv_response);
         
         return srv_response;
     }
@@ -164,8 +163,76 @@ char* loggingOut(char* buf){
     
     srv_response = removeSession(session_id);
     
-    //pisanie do loga
-    writeToLog(time(NULL), buf, srv_response);
-    
     return srv_response;
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* addingGroup(char* buf){
+    json_object *obj, *nazwaGrupy, *sessionID;
+    const char *nazwa, *id;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *jarray = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    obj = json_object_object_get(jarray, "add_group");
+    
+    //wydobywanie obiektów login i haslo
+    nazwaGrupy = json_object_object_get(obj, "name");
+    sessionID = json_object_object_get(obj, "session_id");
+    
+    //zapisywanie loginu i hasła jako string
+    nazwa = json_object_get_string(nazwaGrupy);
+    id = json_object_get_string(sessionID);
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(id), "add_group") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    //sprawdzanie czy grupa zostala dodana prawidlowo
+    if ( addGroup( strdup(nazwa) ) == 1){
+        return "{ \"message\": \"Dodano grupe!\" }";
+    }
+    else{
+        char* message = "{ \"error\": \"Wystapil blad przy dodawaniu grupy!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+}
+
+/**
+ * Metoda do sprawdzania czy klient o przeslanym id sesji ma dostep do żądanej
+ * uslugi.
+ * 
+ * @param session_id
+ * @param req
+ * @return 
+ */
+int checkPermissions(char* session_id, char* req){
+    int i, role;
+    
+    //sprawdzenie czy id sesji ma poprawna dlugosc
+    if( strlen(session_id) != 32 )
+        return -1;
+    
+    for(i=0; i<tab_len; i++){
+        if( strcmp(req, &instructions[i][1] ) == 0 ){
+            role = instructions[i][0];
+            break;
+        }
+    }
+    
+    if (session_id[32] == role)
+        return 1;
+    else
+        return -1;
+    
 }

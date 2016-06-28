@@ -26,6 +26,8 @@ int getClientInstruction(char* buf);
 char* int2char(int i);
 int writeToLog(int timestamp, char* client_message, char* srv_response);
 char* loggingOut(char* buf);
+char* addingGroup(char* buf);
+int checkPermissions(char* session_id, char* req);
 
 #ifdef __cplusplus
 }
