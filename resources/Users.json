@@ -1,6 +1,7 @@
 {
     "user": [
         {"login":"mariusz", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14486"},
+        {"login":"mariusz1", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14487"},
         {"login":"lukasz", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":1, "id":"14871"},
 	{"login":"lukasz1", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":1, "id":"14872"},
         {"login":"kamil", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":2, "id":"2"}

@@ -14,7 +14,7 @@
 #include <string.h>
 
 //nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
-int tab_len = 11;
+int tab_len = 13;
 //!< Brief description after the member
 char* instructions[]={  "1view_results", //0
                         "0get_exams", //1
@@ -26,7 +26,9 @@ char* instructions[]={  "1view_results", //0
                         "0add_answear", //7
                         "0get_answear", //8
                         "3log_out", //9
-                        "1assign_exam_to_group" //10
+                        "1assign_exam_to_group", //10
+                        "2get_students", //11
+                        "2get_groups" //12
 }; //**!< Detailed description after the member 
 
 /**
@@ -201,7 +203,7 @@ char* addingGroup(char* buf){
         return "{ \"message\": \"Dodano grupe!\" }";
     }
     else{
-        char* message = "{ \"error\": \"Wystapil blad przy dodawaniu grupy!\" }";
+        char* message = "{ \"error\": \"Grupa o podanej nazwie juz istnieje!\" }";
         writeToLog(time(NULL), buf, message);
         return message;
     }
@@ -220,7 +222,7 @@ int checkPermissions(char* session_id, char* req){
     int i, role;
     
     //sprawdzenie czy id sesji ma poprawna dlugosc
-    if( strlen(session_id) != 32 )
+    if( strlen(session_id) != 33 )
         return -1;
     
     for(i=0; i<tab_len; i++){
@@ -230,9 +232,65 @@ int checkPermissions(char* session_id, char* req){
         }
     }
     
-    if (session_id[32] == role)
+    if (session_id[32] == role || role == 3)
         return 1;
     else
         return -1;
     
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* getStudentList(char* buf){
+    json_object *session;
+    char* session_id;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "get_students");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(session_id), "get_students") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    return getStudents();
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* getGroupList(char* buf){
+    json_object *session;
+    char* session_id;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "get_groups");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(session_id), "get_groups") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    return getGroups();
 }

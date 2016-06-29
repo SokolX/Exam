@@ -82,13 +82,20 @@ int main(int argc, char *argv[])
                 case 9:
                     say(connect_d, loggingOut(buf));
                     break;
+                case 11:
+                    say(connect_d, getStudentList(buf));
+                    break;
+                case 12:
+                    say(connect_d, getGroupList(buf));
+                    break;
+                case 0:
                 case 1:
                 case 3:
                 case 4:
                 case 5:
                 case 7:
                 case 8:
-                case 0:
+                case 10:
                 default:
                     message = "{ \"error\": \"Nie rozpoznano komunikatu.\" }";
                     writeToLog(time(NULL), buf, message);

@@ -26,7 +26,8 @@ void addSession(char* id_sesji, char* login, char* rola, int time);
 static void addJsonObject(json_object *jobj, char *key, char *val);
 char* removeSession(char* id);
 int addGroup(char* nazwa_gr);
-
+char* getStudents();
+char* getGroups();
 
 #ifdef __cplusplus
 }

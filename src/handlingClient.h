@@ -28,6 +28,8 @@ int writeToLog(int timestamp, char* client_message, char* srv_response);
 char* loggingOut(char* buf);
 char* addingGroup(char* buf);
 int checkPermissions(char* session_id, char* req);
+char* getStudentList(char* buf);
+char* getGroupList(char* buf);
 
 #ifdef __cplusplus
 }

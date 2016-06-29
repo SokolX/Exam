@@ -77,6 +77,12 @@ void addSession(char* id_sesji, char* login, char* rola, int time){
     
 }
 
+/**
+ * 
+ * @param jobj
+ * @param key
+ * @param val
+ */
 static void addJsonObject(json_object *jobj, char *key, char *val) {
       //utworzenie obiektu
       json_object *jstring = json_object_new_string(val);
@@ -138,8 +144,13 @@ char* removeSession(char* id){
     return status;
 }
 
+/**
+ * 
+ * @param nazwa_gr
+ * @return 
+ */
 int addGroup(char* nazwa_gr){
-    json_object *examsArr, *studentsArr, *groupArr, *grFile, *newFileContent, *newGroup, *newObj;
+    json_object *examsArr, *studentsArr, *groupArr, *grFile, *newFileContent, *newGroup, *newObj, *node;
     char* fileName = "../resources/Groups.json";
     
     examsArr = json_object_new_object();
@@ -153,6 +164,20 @@ int addGroup(char* nazwa_gr){
     
     //pobranie tablicy 'grupa'
     groupArr = json_object_object_get(grFile, "grupa");
+    
+    int arraylen = json_object_array_length(groupArr);
+    int i;
+    //petla po wszystkich grupach
+    for (i=0; i< arraylen; i++){
+        node = json_object_array_get_idx(groupArr, i);
+        
+        /*For po kluczach kazdej grupy*/
+        json_object_object_foreach(node, key, val){ 
+            json_object_get_string(val);
+            if ( strcmp(key, nazwa_gr) == 0 )
+                return -1;
+        }
+    }
     
     json_object_object_add(studentsArr, "students", json_object_new_array());
     json_object_object_add(examsArr, "exams", json_object_new_array());
@@ -174,4 +199,81 @@ int addGroup(char* nazwa_gr){
     json_object_to_file_ext(fileName, newFileContent,  JSON_C_TO_STRING_PRETTY);
     
     return 1;
+}
+
+/**
+ * 
+ * @return 
+ */
+char* getStudents(){
+    json_object *jvalue, *user, *plik, *usersList, *srvResponse;
+    
+    //parsowanie zawartosci pliku User.json
+    plik = json_object_from_file("../resources/Users.json");
+    
+    //wydobywanie tablicy uzytkownikow
+    jvalue = json_object_object_get(plik, "user");
+    
+    usersList = json_object_new_object();
+    int arraylen = json_object_array_length(jvalue);
+    int i;
+    //petla po wszystkich uzytkownikach
+    for (i=0; i< arraylen; i++){
+        user = json_object_array_get_idx(jvalue, i);
+        
+        /*For po kluczach kazdego uzytkownika*/
+        json_object_object_foreach(user, key, val){ 
+            char* name;
+
+            if( strcmp(key, "login") == 0 ){
+                name = strdup(json_object_get_string(val));
+            }
+            
+            if ( strcmp(key, "rola") == 0){
+                if( json_object_get_int(val) == 0 ){
+                    addJsonObject(usersList, int2char(i), name);
+                    break;
+                }
+            }
+        }
+    }
+    
+    srvResponse = json_object_new_object();
+    json_object_object_add(srvResponse, "studentsList", usersList);
+    
+    return strdup(json_object_get_string(srvResponse));
+}
+
+/**
+ * 
+ * @return 
+ */
+char* getGroups(){
+    json_object *jvalue, *user, *plik, *groupsList, *srvResponse;
+    
+    //parsowanie zawartosci pliku User.json
+    plik = json_object_from_file("../resources/Groups.json");
+    
+    //wydobywanie tablicy uzytkownikow
+    jvalue = json_object_object_get(plik, "grupa");
+    
+    groupsList = json_object_new_object();
+    int arraylen = json_object_array_length(jvalue);
+    int i;
+    //petla po wszystkich grupach
+    for (i=0; i< arraylen; i++){
+        user = json_object_array_get_idx(jvalue, i);
+        
+        /*For po kluczach kazdej grupy*/
+        json_object_object_foreach(user, key, val){ 
+            json_object_get_string(val);
+            addJsonObject(groupsList, int2char(i), key);
+            break;
+        }
+    }
+    
+    srvResponse = json_object_new_object();
+    json_object_object_add(srvResponse, "groupsList", groupsList);
+    
+    return strdup(json_object_get_string(srvResponse));
 }
