@@ -17,6 +17,10 @@
             {
               "name":"nazwa_egzaminu",
               "due_date":"1464604777"
+            },
+            {
+              "name":"egzam_mat",
+              "due_date":"1467650596"
             }
           ]
         }
@@ -26,10 +30,32 @@
       "nowa_grupa":[
         {
           "students":[
+            {
+              "login":"mariusz"
+            }
           ]
         },
         {
           "exams":[
+          ]
+        }
+      ]
+    },
+    {
+      "nowa_gr":[
+        {
+          "students":[
+            {
+              "login":"mariusz"
+            }
+          ]
+        },
+        {
+          "exams":[
+            {
+              "name":"egzam_mat",
+              "due_date":"1467646562"
+            }
           ]
         }
       ]

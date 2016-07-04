@@ -30,6 +30,9 @@ char* addingGroup(char* buf);
 int checkPermissions(char* session_id, char* req);
 char* getStudentList(char* buf);
 char* getGroupList(char* buf);
+char* assignStudentToGroup(char* buf);
+char* getExamsList(char* buf);
+char* assignExamToGroup(char* buf);
 
 #ifdef __cplusplus
 }

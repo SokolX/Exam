@@ -28,6 +28,11 @@ char* removeSession(char* id);
 int addGroup(char* nazwa_gr);
 char* getStudents();
 char* getGroups();
+int checkSession(char* id);
+char* addStudentToGroup(char* student, char* group);
+int addToGroup(json_object *newGr, char* key, json_object *gr, char* student, int mode);
+char* getExams();
+char* addExamToGroup(char* exam, char* group);
 
 #ifdef __cplusplus
 }

@@ -16,19 +16,19 @@
 //nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
 int tab_len = 13;
 //!< Brief description after the member
-char* instructions[]={  "1view_results", //0
-                        "0get_exams", //1
+char* instructions[]={  "3view_results", //0
+                        "3get_exams", //1
                         "2add_group", //2
                         "2assign_to_group", //3
-                        "1check_answears", //4
-                        "1add_exam", //5
+                        "3check_answears", //4
+                        "3add_exam", //5
                         "3log_in", //6
                         "0add_answear", //7
                         "0get_answear", //8
                         "3log_out", //9
-                        "1assign_exam_to_group", //10
+                        "3assign_exam_to_group", //10
                         "2get_students", //11
-                        "2get_groups" //12
+                        "3get_groups" //12
 }; //**!< Detailed description after the member 
 
 /**
@@ -96,7 +96,7 @@ char* logInChecker(char* buf){
         //generowanie odpowiedzi do klienta
         json_object *message = json_object_new_object();
         
-        //dodanie do obiektu JSON klucza "message" i wartosci będącej id_sesji
+        //dodanie do obiektu JSON klucza "logged" i wartosci będącej id_sesji
         addJsonObject(message, "logged", id_sesji);
 
         srv_response = strdup( json_object_get_string(message) );
@@ -232,7 +232,7 @@ int checkPermissions(char* session_id, char* req){
         }
     }
     
-    if (session_id[32] == role || role == 3)
+    if( checkSession(session_id) == 1 && (session_id[32] == role || role == '3') )
         return 1;
     else
         return -1;
@@ -293,4 +293,101 @@ char* getGroupList(char* buf){
     }
     
     return getGroups();
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* assignStudentToGroup(char* buf){
+    json_object *session, *student, *group, *assignment;
+    char* session_id, *student_name, *group_name;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "assign_to_group");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(session_id), "assign_to_group") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    //wydobywanie obiektu z danymi
+    assignment = json_object_object_get(obj, "assignment");
+    
+    student = json_object_object_get(assignment, "user");
+    group = json_object_object_get(assignment, "group");
+    
+    student_name = strdup(json_object_get_string(student));
+    group_name = strdup(json_object_get_string(group));
+    
+    return addStudentToGroup(student_name, group_name);
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* getExamsList(char* buf){
+    json_object *session;
+    char* session_id;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "get_exams");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(session_id), "get_exams") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    return getExams();
+}
+
+char* assignExamToGroup(char* buf){
+    json_object *session, *exam, *group, *assignment;
+    char* session_id, *exam_name, *group_name;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "assign_exam_to_group");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(session_id), "assign_exam_to_group") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    //wydobywanie obiektu z danymi
+    assignment = json_object_object_get(obj, "assignment");
+    
+    exam = json_object_object_get(assignment, "exam");
+    group = json_object_object_get(assignment, "group");
+    
+    exam_name = strdup(json_object_get_string(exam));
+    group_name = strdup(json_object_get_string(group));
+    
+    return addExamToGroup(exam_name, group_name);
 }

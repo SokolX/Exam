@@ -4,7 +4,7 @@
  */
 #include <json-c/json_object.h>
 #include <json-c/json_util.h>
-
+#include <time.h>
 #include "json/json.h"
 
 int checkUserCredentials(const char* login, const char* password){
@@ -249,12 +249,12 @@ char* getStudents(){
  * @return 
  */
 char* getGroups(){
-    json_object *jvalue, *user, *plik, *groupsList, *srvResponse;
+    json_object *jvalue, *group, *plik, *groupsList, *srvResponse;
     
     //parsowanie zawartosci pliku User.json
     plik = json_object_from_file("../resources/Groups.json");
     
-    //wydobywanie tablicy uzytkownikow
+    //wydobywanie tablicy grupy
     jvalue = json_object_object_get(plik, "grupa");
     
     groupsList = json_object_new_object();
@@ -262,10 +262,10 @@ char* getGroups(){
     int i;
     //petla po wszystkich grupach
     for (i=0; i< arraylen; i++){
-        user = json_object_array_get_idx(jvalue, i);
+        group = json_object_array_get_idx(jvalue, i);
         
         /*For po kluczach kazdej grupy*/
-        json_object_object_foreach(user, key, val){ 
+        json_object_object_foreach(group, key, val){ 
             json_object_get_string(val);
             addJsonObject(groupsList, int2char(i), key);
             break;
@@ -276,4 +276,234 @@ char* getGroups(){
     json_object_object_add(srvResponse, "groupsList", groupsList);
     
     return strdup(json_object_get_string(srvResponse));
+}
+
+/**
+ * 
+ * @param id
+ * @return 
+ */
+int checkSession(char* id){
+    json_object *plik, *session_tab, *obj;
+    char* fileName = "../resources/Session.json";
+    
+    //pobranie struktury z pliku Session.json
+    plik = json_object_from_file(fileName);
+    
+    //pobranie tablicy 'sesja'
+    session_tab = json_object_object_get(plik, "sesja");
+    
+    int arraylen = json_object_array_length(session_tab);
+    int i;
+    //petla po wpisach sesji
+    for (i=0; i<arraylen; i++){
+        obj = json_object_array_get_idx(session_tab, i);
+        
+        /*For po kluczach wpisu sessji*/
+        json_object_object_foreach(obj, key, val){
+            const char* value = json_object_get_string(val);
+            
+            if( strcmp(key, "id") == 0 && strcmp(value, id) == 0 ){
+                return 1;
+            }else{
+                break;
+            }
+
+        }
+        
+    }
+
+    return -1;
+}
+
+/**
+ * 
+ * @param student
+ * @param group
+ * @return 
+ */
+char* addStudentToGroup(char* student, char* group){
+    json_object *groupsArr, *grFile, *newFileContent, *newGroup, *node;
+    char* fileName = "../resources/Groups.json";
+    
+    newGroup = json_object_new_array();
+    newFileContent = json_object_new_object();
+    
+    //pobranie struktury z pliku Groups.json
+    grFile = json_object_from_file(fileName);
+    
+    //pobranie tablicy 'grupa'
+    groupsArr = json_object_object_get(grFile, "grupa");
+    
+    int arraylen = json_object_array_length(groupsArr);
+    int i;
+    //petla po wszystkich grupach
+    for (i=0; i< arraylen; i++){
+        node = json_object_array_get_idx(groupsArr, i);
+        
+        /*For po nazwach kazdej grupy*/
+        json_object_object_foreach(node, key, val){ 
+            if ( strcmp(key, group) != 0 ){
+                json_object_array_add(newGroup,node);
+                break;
+            }
+            
+            if ( addToGroup(newGroup, group, val, student, 1) == -1 )
+                return "{ \"error\": \"Student juz jest dodany do grupy!\" }";
+        }
+    }
+    
+    //utworzenie obiektu gotowego do zrzucenia do pliku
+    json_object_object_add(newFileContent, "grupa", newGroup);
+    
+    //zrzucenie tresci z usunietym wpisem sesji do pliku razem z formatowaniem
+    json_object_to_file_ext(fileName, newFileContent,  JSON_C_TO_STRING_PRETTY);
+    
+    return "{ \"student_assigned\": \"Dodano studenta do grupy!\" }";
+}
+
+/**
+ * 
+ * @param newGr
+ * @param key
+ * @param gr
+ * @param student
+ * @return 
+ */
+int addToGroup(json_object *newGr, char* key, json_object *gr, char* student, int mode){
+    json_object *groupArr, *node, *students, *studentNode, *newStudentNode, *newObj, *newGroup;
+    char* array, *keyName;
+    
+    if (mode == 1){
+        array = "students";
+        keyName = "login";
+    }else{
+        array = "exams";
+        keyName = "name";
+    }
+    
+    newGroup = json_object_new_object();
+    groupArr = json_object_new_object();
+    newObj = json_object_new_array();
+    students = json_object_new_array();
+    int arraylen = json_object_array_length(gr);
+    int i;
+    //petla po wszystkich grupach
+    for (i=0; i< arraylen; i++){
+        node = json_object_array_get_idx(gr, i);
+        
+        /*For po nazwach kazdej grupy*/
+        json_object_object_foreach(node, key, val){ 
+            if ( strcmp(key, array) == 0 ){
+                int studentsLen = json_object_array_length(val);
+                int j;
+                
+                for (j=0; j< studentsLen; j++){
+                    studentNode = json_object_array_get_idx(val, j);
+                    
+                    char* login = strdup(json_object_get_string(
+                                    json_object_object_get(studentNode, keyName)
+                    ));
+                    
+                    if( strcmp(login, student) == 0 ){
+                        return -1;
+                    }
+                    
+                    json_object_array_add(students, studentNode);
+                    
+                }
+                
+                //utworzenie obiektu z nowym studentem
+                newStudentNode = json_object_new_object();
+                addJsonObject(newStudentNode, keyName, student);
+                
+                if (mode == 2)
+                    addJsonObject(newStudentNode, "due_date", int2char(time(NULL)+3600));
+                
+                json_object_array_add(students, newStudentNode);
+                json_object_object_add(groupArr, array, students);
+                json_object_array_add(newObj, groupArr);
+                
+            }else{
+                json_object_array_add(newObj, node);
+            }
+        }
+    }
+    json_object_object_add(newGroup, key, newObj);
+    json_object_array_add(newGr, newGroup);
+    return 0;
+}
+
+/**
+ * 
+ * @return 
+ */
+char* getExams(){
+    json_object *jvalue, *plik, *examsList, *srvResponse;
+    
+    //parsowanie zawartosci pliku Exams.json
+    plik = json_object_from_file("../resources/Exams.json");
+    
+    //wydobywanie tablicy grupy
+    jvalue = json_object_object_get(plik, "name");
+    
+    examsList = json_object_new_object();
+    
+    int i=0;
+    /*For po kluczach kazdej grupy*/
+    json_object_object_foreach(jvalue, key, val){ 
+        json_object_get_string(val);
+        addJsonObject(examsList, int2char(i++), key);
+    }
+    
+    srvResponse = json_object_new_object();
+    json_object_object_add(srvResponse, "examsList", examsList);
+    
+    return strdup(json_object_get_string(srvResponse));
+}
+
+/**
+ * 
+ * @param exam
+ * @param group
+ * @return 
+ */
+char* addExamToGroup(char* exam, char* group){
+    json_object *groupsArr, *grFile, *newFileContent, *newGroup, *node;
+    char* fileName = "../resources/Groups.json";
+    
+    newGroup = json_object_new_array();
+    newFileContent = json_object_new_object();
+    
+    //pobranie struktury z pliku Groups.json
+    grFile = json_object_from_file(fileName);
+    
+    //pobranie tablicy 'grupa'
+    groupsArr = json_object_object_get(grFile, "grupa");
+    
+    int arraylen = json_object_array_length(groupsArr);
+    int i;
+    //petla po wszystkich grupach
+    for (i=0; i< arraylen; i++){
+        node = json_object_array_get_idx(groupsArr, i);
+        
+        /*For po nazwach kazdej grupy*/
+        json_object_object_foreach(node, key, val){ 
+            if ( strcmp(key, group) != 0 ){
+                json_object_array_add(newGroup,node);
+                break;
+            }
+            
+            if ( addToGroup(newGroup, group, val, exam, 2) == -1 )
+                return "{ \"error\": \"Egzamin juz jest dodany do grupy!\" }";
+        }
+    }
+    
+    //utworzenie obiektu gotowego do zrzucenia do pliku
+    json_object_object_add(newFileContent, "grupa", newGroup);
+    
+    //zrzucenie tresci z usunietym wpisem sesji do pliku razem z formatowaniem
+    json_object_to_file_ext(fileName, newFileContent,  JSON_C_TO_STRING_PRETTY);
+    
+    return "{ \"exam_assigned\": \"Przypisano egzamin grupie!\" }";
 }

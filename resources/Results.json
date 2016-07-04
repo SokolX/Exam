@@ -1,7 +1,7 @@
 {
-    "nazwa":{
-        "egzam_mat": [
-            {"login":"mariusz", "score":"5"}
+    "login":{
+        "mariusz": [
+            {"egzamin":"egzam_mat", "score":5, "max":10}
         ]
     }
 }

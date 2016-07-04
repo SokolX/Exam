@@ -1,11 +1,36 @@
 {
     "name": {
         "egzam_mat":[
-            {"przedmiot":"matematyka", "id_pytania":"1"},
-            {"przedmiot":"matematyka", "id_pytania":"2"}
+            {"tresc":"Jaki dziś dzień?", "odpowiedz":[
+                {"1":"poniedziałek", "true":"1"},
+                {"2":"wtorek", "true":"0"},
+                {"3":"środa", "true":"0"},
+                {"4":"czwartek", "true":"0"},
+                {"5":"piątek", "true":"0"}
+            ]},
+            {"tresc":"Jakiego koloru jest czarny kot?", "odpowiedz":[
+                {"1":"niebieski", "true":"0"},
+                {"2":"zółty", "true":"0"},
+                {"3":"czarny", "true":"1"},
+                {"4":"różowy", "true":"0"},
+                {"5":"fioletowy", "true":"0"}
+            ]}
         ],
         "egzamin_polski":[
-            {"przedmiot":"polski", "id_pytania":"1"}
+            {"tresc":"2+2?", "odpowiedz":[
+                {"1":"jeden", "true":"0"},
+                {"2":"dwa", "true":"0"},
+                {"3":"trzy", "true":"0"},
+                {"4":"cztery", "true":"1"},
+                {"5":"piec", "true":"0"}
+            ]},
+            {"tresc":"3*3?", "odpowiedz":[
+                {"1":"pięć", "true":"0"},
+                {"2":"sześć", "true":"0"},
+                {"3":"siedem", "true":"0"},
+                {"4":"osiem", "true":"0"},
+                {"5":"dziewięć", "true":"1"}
+            ]}
         ]
     }
 }
