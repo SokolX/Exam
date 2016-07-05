@@ -1,35 +1,35 @@
 {
     "name": {
         "egzam_mat":[
-            {"tresc":"Jaki dziś dzień?", "odpowiedz":[
-                {"1":"poniedziałek", "true":"1"},
-                {"2":"wtorek", "true":"0"},
-                {"3":"środa", "true":"0"},
-                {"4":"czwartek", "true":"0"},
-                {"5":"piątek", "true":"0"}
+            {"tresc":"Ile wynosi 2+2?", "odpowiedz":[
+                {"1":"1", "true":"0"},
+                {"2":"2", "true":"0"},
+                {"3":"3", "true":"0"},
+                {"4":"4", "true":"1"},
+                {"5":"5", "true":"0"}
             ]},
-            {"tresc":"Jakiego koloru jest czarny kot?", "odpowiedz":[
-                {"1":"niebieski", "true":"0"},
-                {"2":"zółty", "true":"0"},
-                {"3":"czarny", "true":"1"},
-                {"4":"różowy", "true":"0"},
-                {"5":"fioletowy", "true":"0"}
+            {"tresc":"Ile wynosi 2+2*2?", "odpowiedz":[
+                {"1":"2", "true":"0"},
+                {"2":"4", "true":"0"},
+                {"3":"6", "true":"1"},
+                {"4":"8", "true":"0"},
+                {"5":"10", "true":"0"}
             ]}
         ],
         "egzamin_polski":[
-            {"tresc":"2+2?", "odpowiedz":[
-                {"1":"jeden", "true":"0"},
-                {"2":"dwa", "true":"0"},
-                {"3":"trzy", "true":"0"},
-                {"4":"cztery", "true":"1"},
-                {"5":"piec", "true":"0"}
+            {"tresc":"Kto jest autorem książki 'Pan Tadeusz'?", "odpowiedz":[
+                {"1":"Jan Kochanowski", "true":"0"},
+                {"2":"Edward Stachura", "true":"0"},
+                {"3":"Czesław Miłosz", "true":"0"},
+                {"4":"Adam Mickiewicz", "true":"1"},
+                {"5":"Jan Brzechwa", "true":"0"}
             ]},
-            {"tresc":"3*3?", "odpowiedz":[
-                {"1":"pięć", "true":"0"},
-                {"2":"sześć", "true":"0"},
-                {"3":"siedem", "true":"0"},
-                {"4":"osiem", "true":"0"},
-                {"5":"dziewięć", "true":"1"}
+            {"tresc":"Jak ma na imie sierotka Marysia?", "odpowiedz":[
+                {"1":"Ewa", "true":"0"},
+                {"2":"Jola", "true":"0"},
+                {"3":"Kamila", "true":"0"},
+                {"4":"Magda", "true":"0"},
+                {"5":"Maria", "true":"1"}
             ]}
         ]
     }

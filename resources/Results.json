@@ -1,7 +1,16 @@
 {
     "login":{
         "mariusz": [
-            {"egzamin":"egzam_mat", "score":5, "max":10}
+            {"egzamin":"egzam_mat", "score":1, "max":2}
+        ],
+        "mariusz1": [
+            {"egzamin":"egzamin_polski", "score":2, "max":2}
+        ],
+        "mariusz2": [
+            {"egzamin":"egzamin_polski", "score":0, "max":2},
+            {"egzamin":"egzam_mat", "score":2, "max":2},
+            {"egzamin":"egzam_mat2", "score":11, "max":20},
+            {"egzamin":"egzam_mat3", "score":19, "max":31}
         ]
     }
 }

@@ -33,6 +33,9 @@ char* addStudentToGroup(char* student, char* group);
 int addToGroup(json_object *newGr, char* key, json_object *gr, char* student, int mode);
 char* getExams();
 char* addExamToGroup(char* exam, char* group);
+char* getLogin(char* login);
+char* getStudentResults(char* login);
+char* getStudentsAnswears();
 
 #ifdef __cplusplus
 }

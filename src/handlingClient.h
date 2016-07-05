@@ -33,6 +33,8 @@ char* getGroupList(char* buf);
 char* assignStudentToGroup(char* buf);
 char* getExamsList(char* buf);
 char* assignExamToGroup(char* buf);
+char* getStudentAnswears(char* buf);
+char* getStudentsResults(char* buf);
 
 #ifdef __cplusplus
 }

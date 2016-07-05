@@ -73,6 +73,9 @@ int main(int argc, char *argv[])
             
             //wybór odpowiedniej akcji na podstawie zadania
             switch(selector){
+                case 0:
+                    say(connect_d, getStudentsResults(buf));
+                    break;
                 case 1:
                     say(connect_d, getExamsList(buf));
                     break;
@@ -84,6 +87,9 @@ int main(int argc, char *argv[])
                     break;
                 case 6:
                     say(connect_d, logInChecker(buf));
+                    break;
+                case 8:
+                    say(connect_d, getStudentAnswears(buf));
                     break;
                 case 9:
                     say(connect_d, loggingOut(buf));
@@ -97,11 +103,9 @@ int main(int argc, char *argv[])
                 case 12:
                     say(connect_d, getGroupList(buf));
                     break;
-                case 0:
                 case 4:
                 case 5:
                 case 7:
-                case 8:
                 default:
                     message = "{ \"error\": \"Nie rozpoznano komunikatu.\" }";
                     writeToLog(time(NULL), buf, message);

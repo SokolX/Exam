@@ -1,10 +1,16 @@
 {
   "sesja":[
     {
-      "id":"1facdf647fefa4b2f8a05848bf536bd72",
-      "login":"kamil",
-      "rola":"2",
-      "logged":"1466445559"
+      "id":"5f3d9d3fbfff0d5c8098c287d0cb387e0",
+      "login":"mariusz",
+      "rola":"0",
+      "logged":"1467655196"
+    },
+    {
+      "id":"d31789a58e39e8530b65201f98d3b70f0",
+      "login":"mariusz2",
+      "rola":"0",
+      "logged":"1467734008"
     }
   ]
 }

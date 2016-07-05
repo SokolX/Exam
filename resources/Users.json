@@ -2,8 +2,13 @@
     "user": [
         {"login":"mariusz", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14486"},
         {"login":"mariusz1", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14487"},
+        {"login":"mariusz2", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14488"},
+        {"login":"mariusz3", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14489"},
+        {"login":"mariusz4", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14490"},
+        {"login":"mariusz5", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14491"},
+        {"login":"mariusz6", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":0, "id":"14492"},
         {"login":"lukasz", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":1, "id":"14871"},
 	{"login":"lukasz1", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":1, "id":"14872"},
-        {"login":"kamil", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":2, "id":"2"}
+        {"login":"admin", "haslo":"e10adc3949ba59abbe56e057f20f883e", "rola":2, "id":"2"}
     ]
 }

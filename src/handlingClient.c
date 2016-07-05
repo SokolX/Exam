@@ -24,11 +24,12 @@ char* instructions[]={  "3view_results", //0
                         "3add_exam", //5
                         "3log_in", //6
                         "0add_answear", //7
-                        "0get_answear", //8
+                        "0get_answears", //8
                         "3log_out", //9
                         "3assign_exam_to_group", //10
                         "2get_students", //11
-                        "3get_groups" //12
+                        "3get_groups", //12
+                        "0get_"
 }; //**!< Detailed description after the member 
 
 /**
@@ -390,4 +391,63 @@ char* assignExamToGroup(char* buf){
     group_name = strdup(json_object_get_string(group));
     
     return addExamToGroup(exam_name, group_name);
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* getStudentAnswears(char* buf){
+    json_object *session;
+    char* session_id, *login;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "get_answears");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(session_id), "get_answears") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    //wydobycie loginu studenta na podstawie przeslanego ID sesji
+    login = getLogin(session_id);
+    
+    return getStudentResults(login);
+}
+
+/**
+ * 
+ * @param buf
+ * @return 
+ */
+char* getStudentsResults(char* buf){
+    json_object *session;
+    char* session_id;
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    //wydobywanie tablicy
+    session = json_object_object_get(obj, "view_results");
+    
+    //wydobywanie id sesji
+    session_id = strdup(json_object_get_string(session));
+    
+    //sprawdzenie czy uzytkownik ma dostep do uslugi
+    if ( checkPermissions(strdup(session_id), "view_results") != 1){
+        char* message = "{ \"error\": \"Brak uprawnien do uslugi!\" }";
+        writeToLog(time(NULL), buf, message);
+        return message;
+    }
+    
+    return getStudentsAnswears();
 }

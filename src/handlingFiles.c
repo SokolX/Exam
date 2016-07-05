@@ -507,3 +507,92 @@ char* addExamToGroup(char* exam, char* group){
     
     return "{ \"exam_assigned\": \"Przypisano egzamin grupie!\" }";
 }
+
+/**
+ * 
+ * @param sesja
+ * @return 
+ */
+char* getLogin(char* sesja){
+    json_object *plik, *session_tab, *obj;
+    char* fileName = "../resources/Session.json";
+    
+    //pobranie struktury z pliku Session.json
+    plik = json_object_from_file(fileName);
+    
+    //pobranie tablicy 'sesja'
+    session_tab = json_object_object_get(plik, "sesja");
+    
+    int arraylen = json_object_array_length(session_tab);
+    int i;
+    //petla po wpisach sesji
+    for (i=0; i<arraylen; i++){
+        obj = json_object_array_get_idx(session_tab, i);
+        
+        /*For po kluczach wpisu sessji*/
+        json_object_object_foreach(obj, key, val){
+            const char* value = json_object_get_string(val);
+            
+            if( strcmp(key, "id") == 0 ){
+                if ( strcmp(value, sesja) != 0 )
+                    break;
+            }
+            
+            if( strcmp(key, "login") == 0 )
+                return strdup(value);
+
+        }
+        
+    }
+
+    return "nieznaleziono";
+}
+
+/**
+ * 
+ * @param login
+ * @return 
+ */
+char* getStudentResults(char* login){
+    json_object *plik, *results_tab, *response;
+    char* fileName = "../resources/Results.json";
+    
+    //pobranie struktury z pliku Session.json
+    plik = json_object_from_file(fileName);
+    
+    //pobranie tablicy 'sesja'
+    results_tab = json_object_object_get(plik, "login");
+        
+    response = json_object_new_object();
+    /*For po kluczach wpisu sessji*/
+    json_object_object_foreach(results_tab, key, val){
+
+        if( strcmp(key, login) == 0 ){
+            json_object_object_add(response, "results", val);
+            break;
+        }
+    }
+    
+    return strdup(json_object_get_string(response));
+}
+
+/**
+ * 
+ * @return 
+ */
+char* getStudentsAnswears(){
+    json_object *plik, *results_tab, *response;
+    char* fileName = "../resources/Results.json";
+    
+    //pobranie struktury z pliku Session.json
+    plik = json_object_from_file(fileName);
+    
+    //pobranie tablicy 'sesja'
+    results_tab = json_object_object_get(plik, "login");
+    
+    //tworzenie obiektu z odpowiedzia do klienta
+    response = json_object_new_object();
+    json_object_object_add(response, "students_answears", results_tab);
+    
+    return strdup(json_object_get_string(response));
+}
