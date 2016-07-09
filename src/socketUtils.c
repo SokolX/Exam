@@ -120,7 +120,7 @@ int read_in(int socket, char *buf, int len)
  * @param socket - gniazdo komunikacji z klientem
  * @param s - informacja do klienta
  * @param result - 0 w przypadku powodzenia lub -1 w przypadku błędu
- * @return 
+ * @return zwraca albo odpowiedź serwera na żądanie klienta lub komunikat o błędzie
  */
 int say(int socket, char *s)
 {

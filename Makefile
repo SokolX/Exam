@@ -1,6 +1,6 @@
 CC=gcc -Wall
 SRC2=main.c
-OUT=out/main
+OUT=out/mainServer
 LIB=json
 LIB2=crypto
 all:$(SRC2)

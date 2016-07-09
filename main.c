@@ -10,7 +10,7 @@
  * \a sokolek@wit.edu.pl
  * 
  * \file main.c
- * \brief Główny plik wykonywalny
+ * \brief Główny plik, który odpowiada za komunikację klient - serwer
  */
 #include <stdlib.h>
 #include <unistd.h>
@@ -22,12 +22,22 @@
 #include <signal.h>
 #include <errno.h>
 #include "komunikat_error.h"
-///zmienna przechowująca główne gniazdo odbiorcze servera do odbierania połączeń (deskryptor gniazda)
+///zmienna przechowująca główne gniazdo odbiorcze serwera do odbierania połączeń (deskryptor gniazda)
 int listener_d; //musi byc zadeklarowane przed funkcją handle_shotdown
 #include "src/socketUtils.h"
 #include "src/handlingClient.h"
 
-
+/**
+ * Główna funkcja, w której jest zoorganizowana komunikacja z klientem. 
+ * Wykorzystuje podstawowe funkcje systemowe oraz nasze komunikaty wysyłane 
+ * od klienta potrzebne do komunikacji. 
+ * @param argc - adres w postaci IP adresu serwera
+ * @param argv - nr portu, który będzie wystawiony publicznie do komunikacji 
+ * z klientem
+ * @param selector - przyjmuje 
+ * 
+ * @return 
+ */
 int main(int argc, char *argv[])
 {   
     //deklaracja zmiennej przechowujacej numer portu
@@ -68,10 +78,10 @@ int main(int argc, char *argv[])
 
             read_in(connect_d, buf, sizeof(buf));
             
-            //sprawdzanie czego klienta zada
+            ///sprawdzanie czego klienta żąda
             int selector = getClientInstruction(buf);
             
-            //wybór odpowiedniej akcji na podstawie zadania
+            //wybór odpowiedniej akcji na podstawie żądania
             switch(selector){
                 case 0:
                     say(connect_d, getStudentsResults(buf));

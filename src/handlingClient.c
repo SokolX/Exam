@@ -13,6 +13,17 @@
 #include <stdio.h>
 #include <string.h>
 
+/** param tab_len
+ * Określa ilość instrukcji obsługiwanych przez serwer. W zależności od roli 
+ * użytkownika w systemie określana jest ich dostępność.  
+ * W razie dodawania nowych instrukcji należy pamiętać, aby inkrementować/
+ * dekrementować tą zmienną. 
+ * 
+ * param instruction[] 
+ * Zmienna tablicowa zawierająca w sobie nazwy obsługiwanych instrukcji 
+ * obsługiwanych przez serwer. 
+ *  
+ */
 //nalezy pamietac zeby zmieniac przy dodawaniu/usuwaniu komend do tablicy
 int tab_len = 13;
 //!< Brief description after the member
@@ -134,7 +145,7 @@ char* int2char(int i){
  * @param timestamp - zwraca czas żądania w sekundach
  * @param *client_message - informacja o żądaniu od klienta
  * @param *serv_response - jaką informację wysłał klientowi serwer
-
+ * @return zamyka plik, w którym logowane są akcje
  */
 int writeToLog(int timestamp, char* client_message, char* srv_response) {
     FILE *log; ///< FILE 
@@ -147,9 +158,10 @@ int writeToLog(int timestamp, char* client_message, char* srv_response) {
 }
 
 /**
- * 
- * @param buf
- * @return 
+ * Funkcja odpowiadająca za wylogowanie użytkownika z aplikacji. Polega na 
+ * usunięciu wpisu id sesji w pliku sesji. 
+ * @param buf - zawiera id sesji do usunięcia
+ * @return odpowiedź do klienta
  */
 char* loggingOut(char* buf){
     json_object *session;
@@ -170,7 +182,9 @@ char* loggingOut(char* buf){
 }
 
 /**
- * 
+ * Funkcja odpowiadająca za dodanie grupy. Przed dodaniem grupy, weryfikujemy czy 
+ * użytkownik próbujący dodać grupę ma uprawnienie do wykonania operacji. Wykorzystujemy 
+ * do tego role. Dodawanie grupy jest sprawdzanie na wypadek próby dodania grupy o tej samej nazwie. 
  * @param buf
  * @return 
  */
@@ -269,8 +283,10 @@ char* getStudentList(char* buf){
 }
 
 /**
- * 
- * @param buf
+ * Funkcja pobierająca dla egzaminatora listę dostępnych egzaminów oraz 
+ * listę grup, którym może przypisać egzamin. 
+ * Weryfikowane jest w tym przypadku czy użytkownik ma uprawnienie do tej funkcji. 
+ * @param buf - przyjmuje id sesji
  * @return 
  */
 char* getGroupList(char* buf){
@@ -361,6 +377,11 @@ char* getExamsList(char* buf){
     return getExams();
 }
 
+/**
+ * 
+ * @param buf
+ * @return 
+ */
 char* assignExamToGroup(char* buf){
     json_object *session, *exam, *group, *assignment;
     char* session_id, *exam_name, *group_name;
@@ -394,9 +415,11 @@ char* assignExamToGroup(char* buf){
 }
 
 /**
- * 
- * @param buf
- * @return 
+ * Funkcja pozwalająca studentowi na zobaczenie listy wyników z egzaminów, z których
+ * ma już wynik. Na podstawie id sesji jest określana dostępność tej funkcji dla 
+ * użytkownika w systemie. 
+ * @param buf - id sesji
+ * @return getStudentResults(login) - funkcję na rcze login by studnet widział tylko swoje wyniki
  */
 char* getStudentAnswears(char* buf){
     json_object *session;
@@ -425,9 +448,11 @@ char* getStudentAnswears(char* buf){
 }
 
 /**
- * 
- * @param buf
- * @return 
+ * Funkcja pozwalająca egzaminatorowi na zobaczenie listy użytkowników, którzy
+ * mają już wyniki z egzaminów. Na podstawie id sesji jest określana dostępność 
+ * tej funkcji dla użytkownika w systemie. 
+ * @param buf - id sesji do weryfikacji 
+ * @return getStudentsAnswears - czyli metodę, która pozwoli wydobyć listę
  */
 char* getStudentsResults(char* buf){
     json_object *session;

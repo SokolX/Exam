@@ -44,7 +44,15 @@ int checkUserCredentials(const char* login, const char* password){
     return -1;
     
 }
-
+/**
+ * Funkcja tworząca id sesji. Dzięki id sesji użytkownik będzie autoryzowany przy
+ * każdym kolejnym żądaniu do serwera. Id sesji nadawane jest przy logowaniu. 
+ * Id sesji usuwane będzie po wylogowaniu użytkownika z systemu. 
+ * @param id_sesji - wygenerowany hash sesji
+ * @param login - nazwa użytkownika w systemie
+ * @param rola - rola użytkownika w systemie (np. student)
+ * @param time - czas rozpoczęcia sesji (timestamp)
+ */
 void addSession(char* id_sesji, char* login, char* rola, int time){
     
     json_object *plik, *wpis, *sesja, *new_file_content;
@@ -92,7 +100,8 @@ static void addJsonObject(json_object *jobj, char *key, char *val) {
 }
 
 /**
- * 
+ * Funkcja usuwająca sesję użytkownika. Wykorzystywana przy wylogywaniu użytkownika
+ * z systemu. 
  * @param id
  * @return 
  */
@@ -145,8 +154,9 @@ char* removeSession(char* id){
 }
 
 /**
- * 
- * @param nazwa_gr
+ * Funkcja pozwalająca administratorowi systemu dodać grupę studencką. 
+ * Przyjmuje jeden parametr, którym jest nazwa grupy. 
+ * @param nazwa_gr - nazwa grupy, którą będzie chciał dodać użytkownik
  * @return 
  */
 int addGroup(char* nazwa_gr){

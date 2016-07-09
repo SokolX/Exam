@@ -47,6 +47,9 @@
           "students":[
             {
               "login":"mariusz"
+            },
+            {
+              "login":"mariusz4"
             }
           ]
         },
@@ -56,6 +59,37 @@
               "name":"egzam_mat",
               "due_date":"1467646562"
             }
+          ]
+        }
+      ]
+    },
+    {
+      "kolej":[
+        {
+          "students":[
+            {
+              "login":"mariusz"
+            }
+          ]
+        },
+        {
+          "exams":[
+            {
+              "name":"egzamin_polski",
+              "due_date":"1467744654"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "asd":[
+        {
+          "students":[
+          ]
+        },
+        {
+          "exams":[
           ]
         }
       ]

@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   md5Converter.h
- * Author: mariusz
- *
- * Created on June 1, 2016, 7:59 PM
- */
 /**
  * \file md5Converter.h
  * \brief Plik nagłówkowy dla pliku "md5Converter.c"
+ * Plik zawierający dołączenie biblioteki do obsługi metod tworzących ciągi hash'y
+ * w md5 oraz deklarację metody zamieniającej ciąg znaków na hash. 
  */
 #ifndef MD5CONVERTER_H
 #define MD5CONVERTER_H

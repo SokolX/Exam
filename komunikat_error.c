@@ -3,9 +3,10 @@
  * 
  * \brief Uniwersalna metoda wykorzystywana w przypadku błędu w aplikacji. 
  *
- * Gdy wystąpi bład w aplikacji - zatrzyma program, a także poinformuje użytkownika
- * o występieniu błędu. Metoda w wywołaniuu przyjmuje łańcuch znaków. Wywołanie 
- * metody: error("Przykładowy komunikat. "). exit(1) - zatrzymuje działanie programu. 
+ * Gdy wystąpi bład w aplikacji - pozwoli informować klienta o występieniu określonego 
+ * błędu. Może zatrzymać program, a także poinformuje użytkownika
+ * o występieniu błędu. Metoda w wywołaniu przyjmuje łańcuch znaków. Wywołanie 
+ * metody: error("Przykładowy komunikat. ").  
  * 
  * \param *msg - wskaźnik typu char, który przechwouje treść komunikatu o błędzie
  */

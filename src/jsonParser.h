@@ -13,6 +13,7 @@
 /**
  * \file jsonParser.h
  * \brief Plik nagłówkowy dla pliku "jsonParser.c"
+ * Plik zawierający deklaracje metod do obsługi plików typu *.json
  */
 #ifndef JSONPARSER_H
 #define JSONPARSER_H
