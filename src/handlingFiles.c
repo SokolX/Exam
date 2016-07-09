@@ -7,6 +7,15 @@
 #include <time.h>
 #include "json/json.h"
 
+/**
+ * Metoda sprawdza czy w pliku Users.json istnieje wpis użytkownika o loginie
+ * podanym w parametrze, jeżeli tak to sprawdza czy podane hasło jest poprawne.
+ * 
+ * @param login     Podany login użytkownika.
+ * @param password  Podane hasło użytkownka.
+ * @return          Numer roli >= 0 jeżeli dane użytkownika się zgadzają, -1 w 
+ *                  przeciwnym przypadku.
+ */
 int checkUserCredentials(const char* login, const char* password){
 
     json_object *jvalue, *user, *plik;
@@ -212,8 +221,9 @@ int addGroup(char* nazwa_gr){
 }
 
 /**
+ * Metoda pobiera listę wszystkich studentów (wyłącznie studentów) z pliku Users.json.
  * 
- * @return 
+ * @return  Listę studentów w formacie JSON.
  */
 char* getStudents(){
     json_object *jvalue, *user, *plik, *usersList, *srvResponse;
@@ -255,8 +265,9 @@ char* getStudents(){
 }
 
 /**
+ * Metoda odczytuje z pliku Groups.json wszystkie zapisane grupy.
  * 
- * @return 
+ * @return  Listę grup w formacie JSON.
  */
 char* getGroups(){
     json_object *jvalue, *group, *plik, *groupsList, *srvResponse;
@@ -289,9 +300,11 @@ char* getGroups(){
 }
 
 /**
+ *  Metoda sprawdza czy w pliku Session.json istnieje wpis z id_sesji przekazanej
+ * w parametrze.
  * 
- * @param id
- * @return 
+ * @param id    id_sesji
+ * @return      1 jeżeli istnieje, -1 w przeciwnym przypadku.
  */
 int checkSession(char* id){
     json_object *plik, *session_tab, *obj;
@@ -327,10 +340,11 @@ int checkSession(char* id){
 }
 
 /**
+ * Metoda modyfikuje treść pliku Groups.json i przypisuje studenta do danej grupy.
  * 
- * @param student
- * @param group
- * @return 
+ * @param student   Login studenta.
+ * @param group     Nazwa grupy.
+ * @return          Status operacji.
  */
 char* addStudentToGroup(char* student, char* group){
     json_object *groupsArr, *grFile, *newFileContent, *newGroup, *node;
@@ -373,12 +387,13 @@ char* addStudentToGroup(char* student, char* group){
 }
 
 /**
+ * Metoda pomocnicza dla funkcji addStudentToGroup(). 
  * 
- * @param newGr
- * @param key
- * @param gr
- * @param student
- * @return 
+ * @param newGr     Obiekt JSON.   
+ * @param key       Nazwa grupy
+ * @param gr        Obiekt JSON dla danej grupy.   
+ * @param student   Login studenta, który ma zostać przypisany do grupy.
+ * @return          Status operacji.
  */
 int addToGroup(json_object *newGr, char* key, json_object *gr, char* student, int mode){
     json_object *groupArr, *node, *students, *studentNode, *newStudentNode, *newObj, *newGroup;
@@ -445,8 +460,9 @@ int addToGroup(json_object *newGr, char* key, json_object *gr, char* student, in
 }
 
 /**
- * 
- * @return 
+ * Metoda zwraca listę egzaminów pobraną z pliku Exams.json.
+ *  
+ * @return  Listę wszystkich egzaminów w formacie JSON.
  */
 char* getExams(){
     json_object *jvalue, *plik, *examsList, *srvResponse;
@@ -473,10 +489,11 @@ char* getExams(){
 }
 
 /**
+ *  Metoda przypisuje egzamin do grupy w pliku Groups.json.
  * 
- * @param exam
- * @param group
- * @return 
+ * @param exam      Nazwa egzaminu, który ma zostać przypisany do grupy.
+ * @param group     Nazwa grupy, której ma zostać przypisany egzamin.
+ * @return          Status operacji.
  */
 char* addExamToGroup(char* exam, char* group){
     json_object *groupsArr, *grFile, *newFileContent, *newGroup, *node;
@@ -519,9 +536,11 @@ char* addExamToGroup(char* exam, char* group){
 }
 
 /**
+ * Metoda zwraca login użytkownika na podstawie id_sesji przekazanego w parametrze.
+ * Dane pobiera z pliku Session.json.
  * 
- * @param sesja
- * @return 
+ * @param sesja     ID_sesji użytkownika, którego login metoda ma zwrócić.
+ * @return          Login użytkownika.
  */
 char* getLogin(char* sesja){
     json_object *plik, *session_tab, *obj;
@@ -559,9 +578,11 @@ char* getLogin(char* sesja){
 }
 
 /**
+ * Metoda pobiera z pliku Results.json wyniki studenta, którego login został
+ * przekazany w parametrze.
  * 
- * @param login
- * @return 
+ * @param login     Login studenta, którego wyniki mają zostać zwrócone.
+ * @return          Zestawienie egzaminów z uzyskanymi wynikami.
  */
 char* getStudentResults(char* login){
     json_object *plik, *results_tab, *response;
@@ -587,8 +608,9 @@ char* getStudentResults(char* login){
 }
 
 /**
+ *  Metoda pobiera wszystkie odpowiedzi wszystkich studentów z pliku Results.json.
  * 
- * @return 
+ * @return  Liste studentów wraz z ich odpowiedziami w formacie JSON.
  */
 char* getStudentsAnswears(){
     json_object *plik, *results_tab, *response;
@@ -605,4 +627,42 @@ char* getStudentsAnswears(){
     json_object_object_add(response, "students_answears", results_tab);
     
     return strdup(json_object_get_string(response));
+}
+
+/**
+ * Metoda dodaje wpis z nowym egzaminem do pliku Exams.json.
+ * 
+ * @param node  Dane nowego egzaminu w formacie JSON.
+ * @return      Status operacji.
+ */
+char* addExam(json_object *node){
+    json_object *jvalue, *plik, *exam, *newFileContent;
+    const char* examName = (char*)(json_object_get_object(node)->head)->k;
+    char* fileName = "../resources/Exams.json";
+    
+    //parsowanie zawartosci pliku Exams.json
+    plik = json_object_from_file(fileName);
+    
+    //wydobywanie tablicy grupy
+    jvalue = json_object_object_get(plik, "name");
+    
+    /*For po kluczach kazdej grupy*/
+    json_object_object_foreach(jvalue, key, val){ 
+        json_object_get_string(val);
+        if ( strcmp(examName, key) == 0 )
+            return "{ \"error\": \"Egzamin o podanej nazwie już istnieje\" }";
+    }
+    
+    exam = json_object_new_array();
+    exam = json_object_object_get(node, examName);
+    
+    json_object_object_add(jvalue, examName, exam);
+    
+    newFileContent = json_object_new_object();
+    json_object_object_add(newFileContent, "name", jvalue);
+    
+    //zrzucenie tresci z usunietym wpisem sesji do pliku razem z formatowaniem
+    json_object_to_file_ext(fileName, newFileContent,  JSON_C_TO_STRING_PRETTY);
+    
+    return "{ \"exam_added\": \"Dodano egzamin!\" }";
 }

@@ -23,6 +23,12 @@
       "login":"mariusz2",
       "rola":"0",
       "logged":"1467782126"
+    },
+    {
+      "id":"02959ff913b94bfd0253ec517f6801952",
+      "login":"admin",
+      "rola":"2",
+      "logged":"1468084898"
     }
   ]
 }

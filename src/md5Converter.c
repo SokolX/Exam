@@ -12,6 +12,12 @@
 #include <openssl/md5.h>
 #endif
 
+/**
+ * Metoda generuje skróty MD5 podanych ciągów znaków.
+ * 
+ * @param str   Ciąg znaków, dla którego MD5 ma zostać wygenerowany.
+ * @return      Skrót w postaci MD5.
+ */
 char *str2md5(char *str) {
     int n;
     int length = strlen(str);

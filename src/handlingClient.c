@@ -46,6 +46,7 @@ char* instructions[]={  "3view_results", //0
 /**
  * Metoda, której głównym zadaniem jest obsługa żądań klienta. Każde z żądań 
  * jest traktowana jako oddzielna instrukacja. 
+ * 
  * @param buf
  * @return 
  */
@@ -255,9 +256,11 @@ int checkPermissions(char* session_id, char* req){
 }
 
 /**
+ * Metoda zwraca klientowi listę studentów po wcześniejszej weryfikacji czy klient
+ * ma dostęp do usługi.
  * 
- * @param buf
- * @return 
+ * @param buf   Żądanie klienta
+ * @return      Lista studentów formacie JSON.
  */
 char* getStudentList(char* buf){
     json_object *session;
@@ -313,9 +316,12 @@ char* getGroupList(char* buf){
 }
 
 /**
+ * Metoda parsuje żądanie klienta ws. dodania studenta do grupy. Sprawdza czy klient
+ * posiada uprawnienia do usługi i przekazuje dane w formacie JSON do metody 
+ * addStudentToGroup(), która dokonuje zmian w bazie danych.
  * 
- * @param buf
- * @return 
+ * @param buf   Komunikat klienta.
+ * @return      Status operacji.
  */
 char* assignStudentToGroup(char* buf){
     json_object *session, *student, *group, *assignment;
@@ -350,9 +356,11 @@ char* assignStudentToGroup(char* buf){
 }
 
 /**
+ *  Metoda zwraca klientowi listę egzaminów po wcześniejszej weryfikacji czy klient
+ * ma dostęp do usługi.
  * 
- * @param buf
- * @return 
+ * @param buf   Żądanie klienta.
+ * @return      Listę egzaminów w formacie JSON.
  */
 char* getExamsList(char* buf){
     json_object *session;
@@ -378,9 +386,12 @@ char* getExamsList(char* buf){
 }
 
 /**
+ * Metoda do parsowania żadania dodania egzaminu otrzymana od klienta. Sprawdza czy klient
+ * posiada uprawnienia do usługi i przekazuje dane w formacie JSON do metody 
+ * addExamToGroup() dokonujacej zmian w bazie danych.
  * 
- * @param buf
- * @return 
+ * @param buf   Treść żądania klienta.
+ * @return      Status operacji.
  */
 char* assignExamToGroup(char* buf){
     json_object *session, *exam, *group, *assignment;
@@ -475,4 +486,24 @@ char* getStudentsResults(char* buf){
     }
     
     return getStudentsAnswears();
+}
+
+/**
+ * Metoda do parsowania żądania dodania egzaminu przez klienta. Sprawdza czy klient
+ * posiada uprawnienia do usługi i przekazuje dane w formacie JSON do metody 
+ * addExam() dokonujacej zmian w bazie.
+ * 
+ * @param buf   Treść żądania klienta.
+ * @return      Status operacji.
+ */
+char* addingExam(char* buf){
+    
+    //parsowanie komunikatu klienta
+    struct json_object *obj = json_tokener_parse(buf);
+    
+    json_object *node = json_object_new_object();
+    
+    node = json_object_object_get(obj, "add_exam");
+    
+    return addExam(node);
 }

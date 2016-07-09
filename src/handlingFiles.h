@@ -26,6 +26,7 @@ char* addExamToGroup(char* exam, char* group);
 char* getLogin(char* login);
 char* getStudentResults(char* login);
 char* getStudentsAnswears();
+char* addExam(json_object *node);
 
 #ifdef __cplusplus
 }

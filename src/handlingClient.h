@@ -25,6 +25,7 @@ char* getExamsList(char* buf);
 char* assignExamToGroup(char* buf);
 char* getStudentAnswears(char* buf);
 char* getStudentsResults(char* buf);
+char* addingExam(char* buf);
 
 #ifdef __cplusplus
 }

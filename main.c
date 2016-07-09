@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     unsigned int address_size = sizeof(client_addr);
     puts("Czekam na połączenie");
 
-    char buf[255];
+    char buf[4086];
 
     while (1) {
         int connect_d = accept(listener_d, (struct sockaddr *)&client_addr, &address_size);
@@ -95,6 +95,9 @@ int main(int argc, char *argv[])
                 case 3:
                     say(connect_d, assignStudentToGroup(buf));
                     break;
+                case 5:
+                    say(connect_d, addingExam(buf));
+                    break;
                 case 6:
                     say(connect_d, logInChecker(buf));
                     break;
@@ -114,7 +117,6 @@ int main(int argc, char *argv[])
                     say(connect_d, getGroupList(buf));
                     break;
                 case 4:
-                case 5:
                 case 7:
                 default:
                     message = "{ \"error\": \"Nie rozpoznano komunikatu.\" }";
